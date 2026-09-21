@@ -1,0 +1,57 @@
+/* Ported verbatim from the prototype's .notice rules. */
+.notice {
+  display: flex;
+  gap: var(--s3);
+  align-items: flex-start;
+  padding: var(--s3) var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--sunken);
+}
+.icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--ink-3);
+}
+.body {
+  flex: 1;
+  min-width: 0;
+}
+.title {
+  font-weight: var(--fw-bold);
+}
+.notice p {
+  font-size: var(--fs-2);
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: var(--s2);
+  align-items: center;
+}
+.neg,
+.warn,
+.pos {
+  background: var(--bg);
+  border-inline-start-width: 3px;
+}
+.neg {
+  border-inline-start-color: var(--neg);
+}
+.neg .icon {
+  color: var(--neg);
+}
+.warn {
+  border-inline-start-color: var(--warn);
+}
+.warn .icon {
+  color: var(--warn);
+}
+.pos {
+  border-inline-start-color: var(--pos);
+}
+.pos .icon {
+  color: var(--pos);
+}

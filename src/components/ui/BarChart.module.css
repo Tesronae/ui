@@ -1,0 +1,7 @@
+/* Ported verbatim from the prototype's .chart .bar/.bar.hi rules. */
+.bar {
+  fill: var(--line);
+}
+.hi {
+  fill: var(--ink-2);
+}

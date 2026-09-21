@@ -1,0 +1,12 @@
+/* Ported verbatim from the prototype's .ring .track/.pct/.cap rules. */
+.track {
+  stroke: var(--fill-2);
+}
+.percent {
+  fill: var(--ink);
+  font-family: var(--tight);
+  font-weight: var(--fw-bold);
+}
+.caption {
+  fill: var(--ink-3);
+}

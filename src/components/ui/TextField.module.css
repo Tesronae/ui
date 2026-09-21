@@ -1,0 +1,46 @@
+/* Ported verbatim from the prototype's .inp/.field rules. */
+.input {
+  height: 34px;
+  padding: 0 var(--s3);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  width: 100%;
+  transition: border-color var(--dur), box-shadow var(--dur);
+}
+.input:hover {
+  border-color: var(--ink-4);
+}
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: var(--ring);
+  outline: none;
+}
+.input:disabled {
+  background: var(--fill);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+.input[aria-invalid="true"] {
+  border-color: var(--neg);
+}
+.field {
+  display: block;
+}
+.label {
+  display: block;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-med);
+  color: var(--ink-2);
+  margin-bottom: var(--s2);
+}
+.hint {
+  font-size: var(--fs-1);
+  color: var(--ink-3);
+  margin-top: var(--s1);
+}
+.error {
+  font-size: var(--fs-1);
+  color: var(--neg);
+  margin-top: var(--s1);
+}

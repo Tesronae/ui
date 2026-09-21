@@ -1,0 +1,22 @@
+/* Ported verbatim from the prototype's .sk rule + sweep keyframe — the only
+   animation in the product. Reduced-motion is
+   handled globally in src/app/globals.css, not per-component. */
+.skeleton {
+  background: var(--skel);
+  border-radius: var(--r-sm);
+  position: relative;
+  overflow: hidden;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--skel-hi), transparent);
+  animation: sweep var(--dur-slow) infinite;
+}
+@keyframes sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}

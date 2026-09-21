@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: build tokens, twice, confirm deterministic
+        # dist/ is gitignored — it's generated fresh at publish time
+        # (prepublishOnly), never committed. Nothing to diff against here,
+        # so this instead proves the build is reproducible (same input,
+        # same output byte-for-byte), which is what the publish step
+        # actually depends on.
+        run: |
+          npm run build:tokens
+          cp dist/tokens.css /tmp/tokens-run1.css
+          rm -rf dist
+          npm run build:tokens
+          diff /tmp/tokens-run1.css dist/tokens.css
+
+      - name: typecheck
+        run: npx tsc --noEmit
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm test
+
+      - name: build-storybook
+        run: npm run build-storybook

@@ -1,0 +1,72 @@
+html,
+body,
+#storybook-root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+}
+
+.story-root {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+.ims-story-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--s5);
+}
+
+.ims-story-column {
+  display: grid;
+  gap: var(--s5);
+}
+
+.ims-story-field {
+  width: min(100%, 320px);
+}
+
+.ims-story-surface {
+  width: min(100%, 520px);
+}
+
+.ims-story-table {
+  width: min(100%, 960px);
+}
+
+.ims-story-screen {
+  min-height: 100vh;
+}
+
+.ims-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--s4);
+}
+
+.ims-token-swatch {
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg);
+}
+
+.ims-token-color {
+  height: 64px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--swatch);
+}
+
+.ims-token-name {
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 12px;
+}

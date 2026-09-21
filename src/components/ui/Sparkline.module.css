@@ -1,0 +1,17 @@
+/* Ported verbatim from the prototype's .chart .ln/.ar/.pt rules
+   (design/legacy/ims-ui-prototype.html, CHARTS section). Neutral ink, never accent —
+   charts are grey, accent blue means interactive only. */
+.line {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.area {
+  fill: var(--ink-3);
+  opacity: 0.07;
+}
+.point {
+  fill: var(--ink-2);
+}

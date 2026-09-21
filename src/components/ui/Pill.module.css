@@ -1,0 +1,35 @@
+/* Ported verbatim from the prototype's .pill rules. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  height: 20px;
+  padding: 0 var(--s2);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-med);
+  white-space: nowrap;
+  background: var(--fill);
+  color: var(--ink-2);
+}
+.pos {
+  background: var(--pos-soft);
+  color: var(--pos);
+}
+.warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.neg {
+  background: var(--neg-soft);
+  color: var(--neg);
+}
+.accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.outline {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+}

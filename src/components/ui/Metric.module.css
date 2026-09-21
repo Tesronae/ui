@@ -1,0 +1,52 @@
+/* Ported verbatim from the prototype's .metric rules. */
+.metric {
+  position: relative;
+}
+.label {
+  font-size: var(--fs-1);
+  color: var(--ink-3);
+  font-weight: var(--fw-med);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.value {
+  font-family: var(--tight);
+  font-size: var(--fs-9);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.028em;
+  line-height: var(--lh-tightest);
+  margin-top: var(--s2);
+  font-variant-numeric: tabular-nums;
+}
+.meta {
+  font-size: var(--fs-2);
+  color: var(--ink-3);
+  margin-top: var(--s1);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.chart {
+  position: absolute;
+  inset-block-end: var(--s6);
+  inset-inline-end: 0;
+  opacity: 0.85;
+}
+.lockedValue {
+  font-size: var(--fs-3);
+  font-weight: var(--fw);
+  color: var(--ink-3);
+  font-family: var(--sans);
+  letter-spacing: 0;
+  margin-top: var(--s3);
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+@media (max-width: 720px) {
+  .chart {
+    display: none;
+  }
+}

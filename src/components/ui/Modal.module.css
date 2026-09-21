@@ -1,0 +1,53 @@
+/* Ported verbatim from the prototype's .scrim/.modal rules. */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(15, 19, 25, 0.35);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--s8) var(--s4);
+  overflow: auto;
+}
+.modal {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-2);
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+  padding: var(--s5) var(--s6);
+  border-bottom: 1px solid var(--line);
+}
+.header h2 {
+  font-family: var(--tight);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.015em;
+}
+.header p {
+  font-size: var(--fs-2);
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+.headerClose {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+.body {
+  padding: var(--s6);
+}
+.footer {
+  display: flex;
+  gap: var(--s2);
+  padding: var(--s4) var(--s6);
+  border-top: 1px solid var(--line);
+  background: var(--sunken);
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+}

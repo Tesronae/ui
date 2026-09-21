@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc.json",
+  "rules": {
+    "declaration-property-value-allowed-list": {
+      "/^(font-size|line-height|font-weight|z-index)$/": ["/^var\\(--[a-zA-Z0-9-]+\\)$/"],
+      "/^(padding|margin|gap|border-radius)$/": [
+        "/^(0|var\\(--[a-zA-Z0-9-]+\\))(\\s+(0|var\\(--[a-zA-Z0-9-]+\\)))*$/"
+      ]
+    }
+  }
+}

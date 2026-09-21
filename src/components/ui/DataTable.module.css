@@ -1,0 +1,94 @@
+/* Ported verbatim from the prototype's .tbl rules, including the pure-CSS
+   stacked-card technique below 720px (attr(data-l) content — no dual
+   markup, the same DOM just reflows). */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tbl th {
+  text-align: start;
+  font-size: var(--fs-0);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: var(--s3) var(--s3);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+.sortable:hover {
+  color: var(--ink);
+}
+.tbl th[aria-sort] {
+  color: var(--ink);
+}
+.tbl td {
+  padding: var(--s4) var(--s3);
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: middle;
+}
+.tbl tbody tr:last-child td {
+  border-bottom: 0;
+}
+.num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tap {
+  cursor: pointer;
+}
+.tap:hover td {
+  background: var(--sunken);
+}
+.tbl tbody tr td:first-child {
+  box-shadow: inset 2px 0 0 transparent;
+}
+.rowWarn td:first-child {
+  box-shadow: inset 2px 0 0 var(--warn);
+}
+.rowNeg td:first-child {
+  box-shadow: inset 2px 0 0 var(--neg);
+}
+
+@media (max-width: 720px) {
+  .tbl {
+    display: block;
+  }
+  .tbl thead {
+    display: none;
+  }
+  .tbl tbody {
+    display: block;
+  }
+  .tbl tbody tr {
+    display: block;
+    width: 100%;
+    padding: var(--s3) 0;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .tbl tbody tr td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s3);
+    border: 0;
+    padding: var(--s1) var(--s2);
+  }
+  .tbl tbody tr td[data-l]::before {
+    content: attr(data-l);
+    font-size: var(--fs-1);
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+  .rowWarn {
+    box-shadow: inset 2px 0 0 var(--warn);
+  }
+  .rowNeg {
+    box-shadow: inset 2px 0 0 var(--neg);
+  }
+}
