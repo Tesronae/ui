@@ -1,6 +1,6 @@
 {
   "name": "@tesronae/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "Reusable design system: tokens, components, motion. Ships TypeScript source directly \u2014 consuming apps compile it with their own bundler (Next.js: add to transpilePackages).",
   "type": "module",
