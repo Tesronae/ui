@@ -61,6 +61,13 @@ Source values live in `design/tokens/tokens.json` (DTCG format) — see
 
 ## Maturity tiers
 
-See `design/docs/sandbox.md`. Storybook `title:` prefix is the mechanism —
-`Inspiration/*`, `Experiments/*`, `Approved/*` are all unstable by
-definition; only what's exported from `src/index.ts` is `Production`.
+See `design/docs/sandbox.md`. Storybook `title:` prefix is the current
+mechanism — `Inspiration/*`, `Experiments/*`, `Approved/*` are all unstable by
+definition; only what's exported from `src/index.ts` is `Production`. This is
+being superseded by metadata-based tiers (IMS-web `TASKS.md` W1.3.5) that keep
+story IDs and URLs stable across a maturity change; see `sandbox.md` for status.
+
+## Contributing
+
+See `AGENTS.md` for the ownership split with `IMS-web`, the daily contribution
+path, and required verification.

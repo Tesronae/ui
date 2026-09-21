@@ -14,6 +14,7 @@ function SkeletonGroup() {
 const meta = {
   title: "Components/Skeleton",
   component: SkeletonGroup,
+  tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-field"><Story /></div>],
 } satisfies Meta<typeof SkeletonGroup>;
 

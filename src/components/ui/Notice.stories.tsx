@@ -6,6 +6,7 @@ import { Notice } from "./Notice";
 const meta = {
   title: "Components/Notice",
   component: Notice,
+  tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-surface"><Story /></div>],
   args: {
     icon: "info",

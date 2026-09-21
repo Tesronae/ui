@@ -6,6 +6,7 @@ import { Button } from "./Button";
 const meta = {
   title: "Components/Button",
   component: Button,
+  tags: ["maturity:stable"],
   parameters: { layout: "centered" },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;

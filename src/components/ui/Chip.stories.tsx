@@ -5,6 +5,7 @@ import { Chip } from "./Chip";
 const meta = {
   title: "Components/Chip",
   component: Chip,
+  tags: ["maturity:stable"],
   parameters: { layout: "centered" },
   args: { children: "In stock", onClick: fn() },
 } satisfies Meta<typeof Chip>;

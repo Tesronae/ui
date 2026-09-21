@@ -4,6 +4,7 @@ import { RingGauge } from "./RingGauge";
 const meta = {
   title: "Components/Charts/Stock Health Ring",
   component: RingGauge,
+  tags: ["maturity:stable"],
   parameters: { layout: "centered" },
   args: {
     segments: [

@@ -11,6 +11,7 @@ const OPTIONS = [
 const meta = {
   title: "Components/Select",
   component: Select,
+  tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-field"><Story /></div>],
   args: {
     value: "",

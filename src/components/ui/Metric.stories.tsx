@@ -26,6 +26,7 @@ function MetricPreview({ kind }: { kind: "default" | "chart" | "locked" }) {
 const meta = {
   title: "Components/Metric",
   component: MetricPreview,
+  tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-surface"><Story /></div>],
 } satisfies Meta<typeof MetricPreview>;
 
