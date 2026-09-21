@@ -7,6 +7,7 @@ import { TextField } from "./TextField";
 const meta = {
   title: "Components/Modal",
   component: Modal,
+  tags: ["maturity:stable"],
   parameters: { layout: "fullscreen" },
   args: {
     open: true,

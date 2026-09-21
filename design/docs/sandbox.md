@@ -4,8 +4,16 @@ Free-form experimentation, kept deliberately outside the maturity ladder below.
 
 ## Maturity tiers
 
-Storybook `title:` prefixes double as the promotion ladder — no separate
-tooling, just a naming convention checked at review time:
+**Interim mechanism, being superseded.** The shared IMS-web/Tesronae/ui delivery
+workflow (IMS-web `DESIGN.md` §5) specifies maturity as **metadata** —
+Experimental → Candidate → Stable → Deprecated — kept off the story `title:` so
+existing story IDs and URLs stay stable across a maturity change. Tracked as
+IMS-web `TASKS.md` W1.3.5, still open. Until that lands, this repository still
+uses the `title:`-prefix convention below; treat it as current but not final,
+and do not add new tooling that assumes the prefix is permanent.
+
+Storybook `title:` prefixes currently double as the promotion ladder — no
+separate tooling, just a naming convention checked at review time:
 
 | Tier | `title:` prefix | Meaning |
 | --- | --- | --- |

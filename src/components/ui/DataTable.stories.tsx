@@ -69,6 +69,7 @@ function TablePreview({ rows = ROWS }: { rows?: DemoRow[] }) {
 const meta = {
   title: "Components/Data Table",
   component: TablePreview,
+  tags: ["maturity:stable"],
 } satisfies Meta<typeof TablePreview>;
 
 export default meta;

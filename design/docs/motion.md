@@ -29,18 +29,24 @@ retrofitted later.
 ## What exists today
 
 - **`--dur: 130ms`** (`design/tokens/tokens.json` → `motion.dur`) is the only motion
-  token. Every transition in the app uses this one duration and falls back to the CSS
-  default easing (`ease`) — **no easing/curve token exists yet**. See Known gaps below.
-- Consumers of `--dur`: `src/components/ui/Button.module.css`,
-  `src/components/ui/TextField.module.css`, `src/components/ui/Select.module.css`,
-  `src/components/shell/Sidebar.module.css`, `src/components/shell/Topbar.module.css`,
-  `src/components/counter/Counter.module.css`.
-- The only keyframe animation in the app is `src/components/ui/Skeleton.module.css`'s
+  token. Every transition in this package uses this one duration and falls back to
+  the CSS default easing (`ease`) — **no easing/curve token exists yet**. See Known
+  gaps below.
+- Consumers of `--dur` in this package: `src/components/ui/Button.module.css`,
+  `src/components/ui/TextField.module.css`, `src/components/ui/Select.module.css`.
+  (The IMS-web consumer app has its own additional `--dur` consumers, e.g. its
+  shell and counter screens — those stay in `IMS-web`, not here.)
+- The only keyframe animation in this package is `src/components/ui/Skeleton.module.css`'s
   `sweep 1.25s infinite` shimmer.
-- `prefers-reduced-motion` is handled **globally**, not per component:
-  `src/app/globals.css` kills `animation-duration`, `animation-iteration-count`, and
-  `transition-duration` via `!important` inside one
-  `@media (prefers-reduced-motion: reduce)` block.
+- `prefers-reduced-motion` is handled **per component**, in each component's own
+  `.module.css`, not globally. This package ships no app shell and no global
+  stylesheet a consumer is guaranteed to load, so there is no single place to attach
+  one global media-query block to — unlike the IMS-web app this was extracted from,
+  which used one global `@media (prefers-reduced-motion: reduce)` block in its own
+  `src/app/globals.css`. `Skeleton` carries the first such per-component correction
+  (2026-09-21). `Button`, `TextField`, and `Select` still only use plain
+  `transition`s and do not yet disable them under reduced motion — same class of
+  gap, not yet fixed.
 
 ## What never animates
 

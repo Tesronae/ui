@@ -4,6 +4,7 @@ import { Pill } from "./Pill";
 const meta = {
   title: "Components/Pill",
   component: Pill,
+  tags: ["maturity:stable"],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Pill>;
 

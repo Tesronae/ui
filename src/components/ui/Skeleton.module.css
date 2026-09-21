@@ -1,6 +1,7 @@
 /* Ported verbatim from the prototype's .sk rule + sweep keyframe — the only
-   animation in the product. Reduced-motion is
-   handled globally in src/app/globals.css, not per-component. */
+   animation in this package. As a standalone package (unlike the app this was
+   extracted from) there is no consumer-global stylesheet to rely on for
+   reduced-motion, so the correction lives on the component itself. */
 .skeleton {
   background: var(--skel);
   border-radius: var(--r-sm);
@@ -18,5 +19,10 @@
 @keyframes sweep {
   100% {
     transform: translateX(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
   }
 }

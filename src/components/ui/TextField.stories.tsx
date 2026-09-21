@@ -5,6 +5,7 @@ import { TextField } from "./TextField";
 const meta = {
   title: "Components/Text Field",
   component: TextField,
+  tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-field"><Story /></div>],
   args: {
     label: "Supplier name",

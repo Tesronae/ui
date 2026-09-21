@@ -23,7 +23,7 @@
     "lint": "eslint && stylelint \"src/**/*.module.css\"",
     "test": "vitest run",
     "build:tokens": "style-dictionary build --config design/tokens/style-dictionary.config.mjs",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build",
     "prepublishOnly": "npm run build:tokens"
   },

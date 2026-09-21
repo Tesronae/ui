@@ -5,6 +5,7 @@ import { Toast } from "./Toast";
 const meta = {
   title: "Components/Toast",
   component: Toast,
+  tags: ["maturity:stable"],
   parameters: { layout: "centered" },
   args: {
     open: true,
