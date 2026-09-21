@@ -48,6 +48,17 @@ retrofitted later.
   `transition`s and do not yet disable them under reduced motion — same class of
   gap, not yet fixed.
 
+## Reviewing reduced motion in Storybook
+
+The toolbar's "Motion: reduced" control (`.storybook/preview.tsx`'s `motion`
+globalType) lets a reviewer preview reduced motion without changing an OS/browser
+setting. It works by forcing near-zero `animation-duration`/`transition-duration`
+on everything under `.story-root[data-motion="reduce"]`
+(`.storybook/preview.css`) — a review aid only, never shipped to consumers. A
+component's own correction (`Skeleton`'s `@media (prefers-reduced-motion: reduce)`
+block above) is what actually matters at runtime and works identically with or
+without this toolbar control.
+
 ## What never animates
 
 - No page transitions.

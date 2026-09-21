@@ -16,9 +16,34 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    direction: {
+      description: "Text direction",
+      toolbar: {
+        icon: "transfer",
+        items: [
+          { value: "ltr", title: "LTR" },
+          { value: "rtl", title: "RTL" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    motion: {
+      description:
+        "Reduced motion (review-only override — does not change the OS/browser setting; components' own reduced-motion behaviour still runs off the real prefers-reduced-motion media query outside Storybook)",
+      toolbar: {
+        icon: "accessibility",
+        items: [
+          { value: "no-preference", title: "Motion: on" },
+          { value: "reduce", title: "Motion: reduced" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   initialGlobals: {
     theme: "light",
+    direction: "ltr",
+    motion: "no-preference",
   },
   parameters: {
     layout: "padded",
@@ -52,8 +77,9 @@ const preview: Preview = {
       <div
         className="story-root"
         data-theme={context.globals.theme === "dark" ? "dark" : "light"}
+        data-motion={context.globals.motion === "reduce" ? "reduce" : "no-preference"}
         lang="en"
-        dir="ltr"
+        dir={context.globals.direction === "rtl" ? "rtl" : "ltr"}
       >
         <Story />
       </div>

@@ -7,7 +7,15 @@ const meta = {
   title: "Components/Button",
   component: Button,
   tags: ["maturity:stable"],
-  parameters: { layout: "centered" },
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "The only interactive-action primitive — every clickable action in a consuming app should render through this rather than a raw `<button>`. Variants: `primary` (one per view, the affirmative action), `secondary` (default, most actions), `ghost` (low-emphasis, e.g. a modal's Cancel), `danger` (destructive/irreversible actions only). `icon` mode requires `aria-label` at the type level — a bare icon button without one fails to compile, not just a lint warning. `size=\"sm\"` is for compact contexts (table-row actions, toast actions), not a smaller default.",
+      },
+    },
+  },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 

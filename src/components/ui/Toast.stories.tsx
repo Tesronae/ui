@@ -6,7 +6,15 @@ const meta = {
   title: "Components/Toast",
   component: Toast,
   tags: ["maturity:stable"],
-  parameters: { layout: "centered" },
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Transient, auto-dismissing confirmation/undo affordance — mount a fresh `Toast` (a new `key`) per occurrence rather than reopening the same instance, since its countdown does not reset on prop changes by design. `message` is announced via `role=\"status\"`/`aria-live=\"polite\"`, so keep it one complete sentence. `actionLabel`/`onAction` add one action (typically \"Undo\"); it disables re-clicks while `onAction` resolves. Give `durationMs` enough time to notice, read, and act before the toast disappears — longer for anything with an undo action.",
+      },
+    },
+  },
   args: {
     open: true,
     message: "Stock out recorded",

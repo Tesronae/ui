@@ -28,6 +28,14 @@ const meta = {
   component: MetricPreview,
   tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-surface"><Story /></div>],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A labeled number with an optional trend chart, for dashboard/report summary tiles. The `locked` branch is the sanctioned way to render \"this value is hidden by permission\" (e.g. cost/margin without `cost:read`) — it structurally cannot render `value`/`meta`/`chart` while locked, so a caller can't accidentally leak a permissioned number through it. Never pass `0` or an empty string as a stand-in for a locked value; use `locked` instead — see the `CostOmitted` story and `AGENTS.md`'s cost-omission invariant.",
+      },
+    },
+  },
 } satisfies Meta<typeof MetricPreview>;
 
 export default meta;
