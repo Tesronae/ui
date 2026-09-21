@@ -53,6 +53,7 @@ Source values live in `design/tokens/tokens.json` (DTCG format) — see
 | Path | What |
 | --- | --- |
 | `src/index.ts` | The only stable import surface — `Production`-tier only |
+| `@tesronae/ui/DataTable.module.css` | The one exception: a consumer reusing `DataTable`'s table styling for its own hand-rolled markup, rather than the `DataTable` component itself. Narrow and deliberate — add another `.module.css` subpath export only when a real second case needs it, not preemptively |
 | `src/components/ui/` | Component source, stories, tests |
 | `src/components/Icon.tsx` | Icon registry + `Icon` component. Extend it in your own app: `export const ICONS = { ...BASE_ICONS, myIcon: "..." }` |
 | `design/tokens/` | Token source (`tokens.json`) and the build that generates `dist/tokens.css` |

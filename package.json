@@ -1,6 +1,6 @@
 {
   "name": "@tesronae/ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "Reusable design system: tokens, components, motion. Ships TypeScript source directly \u2014 consuming apps compile it with their own bundler (Next.js: add to transpilePackages).",
   "type": "module",
@@ -9,7 +9,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./tokens.css": "./dist/tokens.css",
-    "./tokens.json": "./design/tokens/tokens.json"
+    "./tokens.json": "./design/tokens/tokens.json",
+    "./DataTable.module.css": "./src/components/ui/DataTable.module.css"
   },
   "files": [
     "src",
