@@ -1,4 +1,4 @@
-export { Icon, ICON_NAMES } from "./components/Icon";
+export { Icon, ICONS, ICON_NAMES } from "./components/Icon";
 export type { IconName } from "./components/Icon";
 
 export { BarChart } from "./components/ui/BarChart";

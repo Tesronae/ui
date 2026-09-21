@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Icon, type IconName } from "../Icon";
+import { Icon, ICONS } from "../Icon";
 import { Button } from "./Button";
 import styles from "./Toast.module.css";
 
 // Intl.NumberFormat's unit style, not a hardcoded "s" suffix (same reasoning
-// as StockHealthRing's formatPercent) — locale-aware duration formatting
+// as RingGauge's formatPercent) — locale-aware duration formatting
 // instead of assuming the English "60s" convention.
 const formatSeconds = (seconds: number) =>
   new Intl.NumberFormat(undefined, { style: "unit", unit: "second", unitDisplay: "narrow" }).format(seconds);
@@ -15,6 +15,10 @@ export function Toast({
   open,
   message,
   icon = "checkcircle",
+  // Same extension point as Icon's own registry prop: a consuming app's
+  // toast can name one of its own domain icons, not only this package's
+  // generic set, by passing its own merged registry through.
+  iconRegistry = ICONS,
   durationMs,
   actionLabel,
   onAction,
@@ -22,7 +26,8 @@ export function Toast({
 }: {
   open: boolean;
   message: string;
-  icon?: IconName;
+  icon?: string;
+  iconRegistry?: Record<string, string>;
   durationMs: number;
   actionLabel?: string;
   onAction?: () => boolean | void | Promise<boolean | void>;
@@ -73,7 +78,7 @@ export function Toast({
   return (
     <div className={styles.toast}>
       <div className={styles.icon}>
-        <Icon name={icon} />
+        <Icon name={icon} registry={iconRegistry} />
       </div>
       <div className={styles.body}>
         <span className={styles.message} role="status" aria-live="polite">

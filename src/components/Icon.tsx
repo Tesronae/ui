@@ -14,7 +14,7 @@
  * developer-authored registry, never user or API input.
  */
 
-const ICONS = {
+export const ICONS = {
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/>',
   bell: '<path d="M6 9.5a6 6 0 1 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13.5 6 9.5z"/><path d="M10 18.5a2.2 2.2 0 0 0 4 0"/>',
   help: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 0 1 4.8.8c0 1.7-2.4 2.1-2.4 3.6M12 17.2v.2"/>',
