@@ -15,6 +15,20 @@ body {
   font-family: var(--sans);
 }
 
+/* Storybook review control only ("Motion: reduced" toolbar item) — lets a
+   reviewer preview reduced motion without changing an OS/browser setting.
+   Not shipped: this file never leaves .storybook/. A component's own
+   reduced-motion correction (e.g. Skeleton.module.css) runs off the real
+   `prefers-reduced-motion` media query and works identically with or
+   without this override. */
+.story-root[data-motion="reduce"] *,
+.story-root[data-motion="reduce"] *::before,
+.story-root[data-motion="reduce"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
 .ims-story-row {
   display: flex;
   flex-wrap: wrap;

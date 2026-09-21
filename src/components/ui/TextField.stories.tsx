@@ -7,6 +7,14 @@ const meta = {
   component: TextField,
   tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-field"><Story /></div>],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "The base labeled text input — label, hint, and error message are all wired to the input via `aria-describedby`/`aria-invalid` automatically, so a consumer only needs to supply `label` and, when invalid, `errorMessage`. `hint` and `errorMessage` are mutually exclusive in the rendered output: an invalid field with both set shows only the error. Pass `inputRef` when the consumer needs to imperatively focus the field (e.g. after a validation failure) rather than reaching into the DOM.",
+      },
+    },
+  },
   args: {
     label: "Supplier name",
     value: "",

@@ -4,27 +4,23 @@ Free-form experimentation, kept deliberately outside the maturity ladder below.
 
 ## Maturity tiers
 
-**Interim mechanism, being superseded.** The shared IMS-web/Tesronae/ui delivery
-workflow (IMS-web `DESIGN.md` §5) specifies maturity as **metadata** —
-Experimental → Candidate → Stable → Deprecated — kept off the story `title:` so
-existing story IDs and URLs stay stable across a maturity change. Tracked as
-IMS-web `TASKS.md` W1.3.5, still open. Until that lands, this repository still
-uses the `title:`-prefix convention below; treat it as current but not final,
-and do not add new tooling that assumes the prefix is permanent.
+Maturity is **metadata**, not part of a story's `title:` — `tags: ["maturity:<tier>"]`
+on a story's `meta`, one of `experimental` / `candidate` / `stable` / `deprecated`.
+`.storybook/manager.tsx` renders a sidebar badge for any tier other than `stable`, so
+the default case (stable, the common one) stays quiet and only exceptions are called
+out. Shipped 2026-09-21 (IMS-web `TASKS.md` W1.3.5); all 14 components currently in
+this package are tagged `maturity:stable`, since all 14 are exported from `src/index.ts`.
 
-Storybook `title:` prefixes currently double as the promotion ladder — no
-separate tooling, just a naming convention checked at review time:
+This supersedes an earlier, documented-but-never-applied plan to use a `title:` prefix
+ladder (`Inspiration/*` / `Experiments/*` / `Approved/*` / no prefix for `Production`)
+— no story here ever actually used those prefixes; every story already lived under
+flat `Components/*` titles. The metadata mechanism replaces that plan rather than
+migrating anything, so no story ID or URL changed.
 
-| Tier | `title:` prefix | Meaning |
-| --- | --- | --- |
-| Inspiration | `Inspiration/*` | A reference recreated from elsewhere (an animation, a pattern) — not yet adapted, not yet reviewed. |
-| Experiments | `Experiments/*` | Adapted to this system's tokens and API shape, but unreviewed and unstable — may change or disappear without notice. |
-| Approved | `Approved/*` | Reviewed and stable, not yet extracted as a reusable export. |
-| Production | (no prefix — top-level `Button`, `Modal`, etc.) | Exported from `src/index.ts`, covered by tests, safe to depend on. |
+A component only reaches `src/index.ts` once it's `Production`-equivalent (tagged
+`maturity:stable` and exported). An experimental or candidate component's story still
+lives under `Components/*` (or a dedicated section once one is needed) with its own
+`maturity:experimental`/`maturity:candidate` tag — it just isn't exported yet.
 
-A component only reaches `src/index.ts` once it's `Production`. Nothing in
-`Inspiration/` or `Experiments/` is exported — import from there directly if
-you need to reference the work, but treat it as unstable by construction.
-
-See `design/docs/animation-pipeline.md` (once written) for the specific
-reference → recreate → adapt → promote flow this ladder is built for.
+See `design/docs/animation-pipeline.md` for the reference → recreate → adapt → promote
+flow a new animation goes through before it's ready for a `maturity:candidate` tag.

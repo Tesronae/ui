@@ -13,6 +13,14 @@ const meta = {
   component: Select,
   tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-field"><Story /></div>],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Custom listbox dropdown (deliberately not a native `<select>`) with a combobox-style keyboard model: focus stays on the trigger, arrow keys move a visual cursor, Enter commits it — see the `KeyboardSelection` story. Always pass `aria-label` when more than one `Select` sits on a screen without its own visible label, otherwise its accessible name degenerates to just the selected option's text. Options are a flat `{value, label}` list with no built-in search/filter or grouping; filter a long list in the consuming app before passing `options` in.",
+      },
+    },
+  },
   args: {
     value: "",
     options: OPTIONS,

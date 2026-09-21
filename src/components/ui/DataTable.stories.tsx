@@ -70,6 +70,14 @@ const meta = {
   title: "Components/Data Table",
   component: TablePreview,
   tags: ["maturity:stable"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Sortable, controlled data table for tabular stock/catalog lists. Fully controlled: sort state, its comparator, and row clicks all live with the caller — this component only reflects `sortColumn`/`sortDirection` and reports intent via `onSort`/`onRowClick`; it never sorts data itself. `rowSeverity` drives `warn`/`neg` row styling for low-stock/out-of-stock states — use it instead of inline row styling so severity stays visually consistent across screens. Below a breakpoint it restacks to a card layout (see `MobileStacked`); a column's `label` becomes its stacked-row heading, so keep labels short.",
+      },
+    },
+  },
 } satisfies Meta<typeof TablePreview>;
 
 export default meta;

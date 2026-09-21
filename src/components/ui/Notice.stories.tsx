@@ -8,6 +8,14 @@ const meta = {
   component: Notice,
   tags: ["maturity:stable"],
   decorators: [(Story) => <div className="ims-story-surface"><Story /></div>],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Inline banner for a state that needs explanation, not just a color (stock alerts, sync results). `variant` sets the semantic color (`warn`/`neg`/`pos`; omit for neutral/info) — pick it by meaning, not by which color looks right in context. `action` is an optional single `Button` slot for a direct next step (e.g. \"Review\", \"Reorder\") — don't put more than one action in it. `title` and `children` are both required content: a Notice without a clear one-line title reads as noise.",
+      },
+    },
+  },
   args: {
     icon: "info",
     title: "Inventory update",
