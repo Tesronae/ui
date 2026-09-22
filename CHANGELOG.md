@@ -6,7 +6,10 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
-Everything merged to `main` since `v0.1.2` and not yet tagged/published:
+## [0.1.3] - 2026-09-22
+
+Everything merged to `main` since `v0.1.2`, cut as this pipeline's first
+end-to-end proof (TASKS.md W1.3.6):
 
 - Fixed: `Skeleton`'s sweep animation now disables itself under
   `prefers-reduced-motion: reduce` (this package has no consumer-global
