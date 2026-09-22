@@ -42,19 +42,19 @@ Follow `IMS-web` `DESIGN.md` §5's seven steps, applied to package work:
    long content, direction (RTL), and reduced motion in Storybook. A new or
    materially changed interactive primitive also needs a manual screen-reader
    pass — automated accessibility checks do not substitute for it.
-4. **Verify in context**: pack the candidate (`npm pack` or an equivalent tarball
-   build) and install it into a temporary `IMS-web` checkout to exercise the
-   intended consumer flow — exports, CSS, icons, and representative interactions —
-   before asking `IMS-web` to adopt it.
+4. **Verify in context**: run `npm run verify:packed` (`scripts/verify-packed-consumer.mjs`,
+   TASKS.md W1.3.11) — packs the candidate, installs the real tarball into a scratch
+   consumer, bundles its entry the way a real consumer's bundler would, and checks
+   exports, the packed CSS/token files, the icon registry, and a representative
+   Button/Notice render. `publish.yml` runs it on every tag before `npm publish`;
+   run it locally on a candidate before asking `IMS-web` to adopt it.
 5. **Review**: run the Vercel `web-design-guidelines` audit; apply Impeccable for
    visual critique and Emil Kowalski skills for motion where relevant. Material
    visual/interaction changes need the repository owner's named-commit approval;
    a screenshot alone does not establish motion quality — capture a recording.
-6. **Release and adopt**: tag a release only once package gates pass on that tag,
-   publish the exact verified tarball to GitHub Packages, and write a changelog/
-   migration note for any breaking change. `IMS-web` then pins the new version,
-   updates its lockfile, and reruns its own checks; keep the prior version and
-   lockfile revision available so that adoption can be rolled back.
+6. **Release and adopt**: see "Releasing" below. `IMS-web` then pins the exact new
+   version, updates its lockfile, and reruns its own checks; keep the prior version
+   and lockfile revision available so that adoption can be rolled back.
 7. **Learn**: record regressions or recurring consumer workarounds against the
    affected component's story or `design/docs/` entry.
 
@@ -83,8 +83,32 @@ Follow `IMS-web` `DESIGN.md` §5's seven steps, applied to package work:
 - Do not report a change as done because the source looks plausible; state what
   was actually run.
 
+## Releasing
+
+`.github/workflows/publish.yml` triggers only on a pushed `v*.*.*` tag — never on
+every push to `main` — and re-runs the full gate set on that tag before publishing:
+typecheck, lint, test, tokens-determinism, `build-storybook`, and
+`npm run verify:packed` (TASKS.md W1.3.16: "all gates on tags", not a subset).
+
+1. Bump `version` in `package.json`.
+2. Move `CHANGELOG.md`'s `[Unreleased]` section to a new dated `[X.Y.Z]` heading.
+3. Commit, get the material-change review this file's step 5 requires if
+   applicable, merge to `main`.
+4. `git tag vX.Y.Z && git push origin vX.Y.Z` — this publishes a real, public
+   package version to GitHub Packages. Only push the tag once you mean it.
+5. `publish.yml`'s "verify tag matches package.json version" step fails the whole
+   run if the tag and `package.json`'s `version` disagree — bump the version first.
+
+**Rollback**: GitHub Packages doesn't support silently unpublishing or overwriting
+a version. Rollback happens on the consumer side — `IMS-web` reverts its exact
+`@tesronae/ui` pin and `package-lock.json` to the prior version and reinstalls
+(see `IMS-web`'s `docs/ui-package-adoption.md`). A genuinely broken release still
+gets a new patch version with the fix; the bad version stays published but unused.
+
 ## Documentation routing
 
+- `CHANGELOG.md` — every notable change since the last release, and what's
+  accumulated in `[Unreleased]` since.
 - `design/docs/principles.md` — generic visual/interaction principles, responsive
   rules, accessibility, i18n.
 - `design/docs/motion.md` and `design/docs/animation-pipeline.md` — motion values
