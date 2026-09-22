@@ -39,6 +39,22 @@ jobs:
       - run: npm run lint
       - run: npm test
 
+      - name: build tokens, twice, confirm deterministic
+        # Same check as ci.yml's own step — re-run here too since publish
+        # doesn't depend on a prior CI run having passed (TASKS.md W1.3.16:
+        # "all gates on tags", not "most of them").
+        run: |
+          npm run build:tokens
+          cp dist/tokens.css /tmp/tokens-run1.css
+          rm -rf dist
+          npm run build:tokens
+          diff /tmp/tokens-run1.css dist/tokens.css
+
+      - run: npm run build-storybook
+
+      - name: verify packed consumer (W1.3.11)
+        run: npm run verify:packed
+
       - name: publish
         run: npm publish
         env:
