@@ -1,3 +1,4 @@
+import React from "react";
 import { addons } from "storybook/manager-api";
 
 // Maturity is tag metadata (`tags: ["maturity:<tier>"]` on a story's meta),
