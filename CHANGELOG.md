@@ -6,6 +6,8 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-09-24
+
 - Added: `Checkbox` component — a single boolean checkbox with a label,
   invalid/error-message state, ported from the auth-redesign prototype's
   `.chk` rules (`IMS-web` W1.5.6: "keep me signed in", required-terms
