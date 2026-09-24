@@ -6,6 +6,17 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-09-24
+
+- Fixed: `Checkbox` shifted 2-3px vertically every time it was toggled. The
+  `.chk` label is `display: inline-flex`, which reports a baseline to its own
+  outer inline context; that baseline is derived from a flex item's baseline
+  unless overridden, and toggling `:checked`'s `::after` pseudo-element
+  inside the input changed what the browser treated as that baseline — even
+  though every element's own width/height stayed constant. `vertical-align:
+  top` on `.chk` removes the baseline dependency entirely. Found live in
+  `IMS-web` (W1.5.7 manual verification), reproduced and fixed here.
+
 ## [0.1.5] - 2026-09-24
 
 - Added: `DotField` component — a cursor-repelled dot-grid texture for
