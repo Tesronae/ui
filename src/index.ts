@@ -3,6 +3,7 @@ export type { IconName } from "./components/Icon";
 
 export { BarChart } from "./components/ui/BarChart";
 export { Button } from "./components/ui/Button";
+export { Checkbox } from "./components/ui/Checkbox";
 export { Chip } from "./components/ui/Chip";
 export { DataTable } from "./components/ui/DataTable";
 export type { Column } from "./components/ui/DataTable";

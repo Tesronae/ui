@@ -6,6 +6,15 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-09-24
+
+- Added: `Checkbox` component — a single boolean checkbox with a label,
+  invalid/error-message state, ported from the auth-redesign prototype's
+  `.chk` rules (`IMS-web` W1.5.6: "keep me signed in", required-terms
+  consent).
+- Added: `eye`/`eyeoff` icons to the icon registry, for a password
+  show/hide toggle (`IMS-web` W1.5.6).
+
 ## [0.1.3] - 2026-09-22
 
 Everything merged to `main` since `v0.1.2`, cut as this pipeline's first
