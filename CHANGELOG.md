@@ -6,6 +6,25 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-09-24
+
+- Added: `DotField` component — a cursor-repelled dot-grid texture for
+  pre-authentication surfaces, ported from the auth-redesign prototype's
+  `DOTS` canvas effect (`IMS-web` W1.5.4 Slice A). Static CSS fallback on
+  touch and under `prefers-reduced-motion`; the repel math ships as a
+  separate, independently-tested pure module, `dot-field-math.ts`
+  (`buildDotGrid`, `stepDots`).
+- Added: `--ease-out` and `--dur-step` motion tokens
+  (`design/tokens/tokens.json`'s `motion` group), closing this package's
+  long-standing "no easing token" gap (`design/docs/motion.md`).
+- Added: a scoped "ambient motion on pre-authentication surfaces" carve-out
+  to `design/docs/motion.md`, alongside the already-drafted "how much motion
+  is too much" revision (`IMS-web` `DECISION_LOG.md`, 2026-09-23) — both
+  land in a release for the first time here.
+- Fixed: `Checkbox` was missing from `scripts/lib/consumer-expectations.mjs`'s
+  `EXPECTED_EXPORTS` and from `design/docs/components.md`'s inventory since
+  its `v0.1.4` release; added to both alongside `DotField`.
+
 ## [0.1.4] - 2026-09-24
 
 - Added: `Checkbox` component — a single boolean checkbox with a label,
