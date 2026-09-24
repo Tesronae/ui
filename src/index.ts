@@ -26,3 +26,7 @@ export type { RingSegment } from "./components/ui/chart-math";
 // this package guessing every future project's own vocabulary for "a ring
 // chart of segmented percentages."
 export { RingGauge } from "./components/ui/RingGauge";
+
+export { buildDotGrid, stepDots } from "./components/ui/dot-field-math";
+export type { DotPoint, NearDot, StepDotsOptions, StepDotsResult } from "./components/ui/dot-field-math";
+export { DotField } from "./components/ui/DotField";

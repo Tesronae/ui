@@ -36,11 +36,19 @@ API — see `README.md`):
 | Ring Gauge | `src/components/ui/RingGauge` | `RingGauge.stories.tsx` | yes |
 | Bar Chart | `src/components/ui/BarChart` | `BarChart.stories.tsx` | yes |
 | Sparkline | `src/components/ui/Sparkline` | `Sparkline.stories.tsx` | yes |
+| Checkbox | `src/components/ui/Checkbox` | `Checkbox.stories.tsx` | yes |
+| Dot Field | `src/components/ui/DotField` | `DotField.stories.tsx` | yes |
 
 `RingGauge` is the generic ring-chart primitive — a consuming app composes it into its
 own domain-specific name (e.g. `IMS-web`'s `StockHealthRing`) rather than this package
 guessing every future consumer's vocabulary. There is no `StockHealthRing` here; that
 name belongs to `IMS-web`'s own wrapper.
+
+`DotField` is scoped to pre-authentication surfaces only (sign-in, sign-up, marketing)
+under `design/docs/motion.md`'s ambient-motion carve-out — it is not licensed for an
+authenticated working surface. Its repel math is a separate, independently-tested pure
+module (`dot-field-math.ts`), following the same split `chart-math.ts` uses for the
+sparkline/bar/ring charts.
 
 Icons are a separate registry, not a component: `src/components/Icon.tsx`, one
 name-keyed SVG set, one stroke weight and grid, no Storybook story of its own yet. Do
@@ -97,9 +105,10 @@ Do not treat hover-only behaviour as the complete interaction design.
 
 ## Automated coverage
 
-- Unit tests (`npm test`, Vitest): 69 tests across 15 files as of 2026-09-21, one test
-  file per component plus `Icon`. These check behaviour and accessible attributes
-  (ARIA roles/states, keyboard handling), not visual appearance.
+- Unit tests (`npm test`, Vitest): 93 tests across 19 files as of 2026-09-24, one test
+  file per component plus `Icon` and each pure-math module (`chart-math`,
+  `dot-field-math`). These check behaviour and accessible attributes (ARIA
+  roles/states, keyboard handling), not visual appearance.
 - Storybook's `@storybook/addon-a11y` runs an axe accessibility check against every
   story on every `build-storybook` (`.storybook/main.ts`; `parameters.a11y.test =
   "error"` in `.storybook/preview.tsx` fails the build on a violation).

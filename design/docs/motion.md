@@ -28,10 +28,11 @@ retrofitted later.
 
 ## What exists today
 
-- **`--dur: 130ms`** (`design/tokens/tokens.json` → `motion.dur`) is the only motion
-  token. Every transition in this package uses this one duration and falls back to
-  the CSS default easing (`ease`) — **no easing/curve token exists yet**. See Known
-  gaps below.
+- **`--dur: 130ms`** (`design/tokens/tokens.json` → `motion.dur`) is the package's
+  default transition duration. **`--dur-step: 250ms`** is for a longer, deliberate
+  transition (a step change, not a hover/focus micro-interaction). **`--ease-out`**
+  (`cubic-bezier(0.23, 1, 0.32, 1)`) is the package's only easing curve so far —
+  everything else still falls back to the CSS default `ease`.
 - Consumers of `--dur` in this package: `src/components/ui/Button.module.css`,
   `src/components/ui/TextField.module.css`, `src/components/ui/Select.module.css`.
   (The IMS-web consumer app has its own additional `--dur` consumers, e.g. its
@@ -59,19 +60,78 @@ component's own correction (`Skeleton`'s `@media (prefers-reduced-motion: reduce
 block above) is what actually matters at runtime and works identically with or
 without this toolbar control.
 
-## What never animates
+## How much motion is too much
 
-- No page transitions.
-- No decorative hover lift.
-- No entrance animations.
+Animation is allowed — it isn't banned by default. The line is purpose, not
+presence: motion earns its place by communicating state, feedback, continuity, or
+relationship (a step transition, a field settling in after an error, a loading
+spinner). Motion added because a component *can* animate, with no state it's
+communicating, is what to avoid — not motion itself.
 
-These are deliberate product decisions (`PRODUCT.md`'s personality section: this app
-should not feel like "an animation showcase"), not gaps to fill in.
+Revised 2026-09-23 (`IMS-web` `DECISION_LOG.md`): this replaces the earlier flat "no
+entrance animations / no decorative hover lift / no page transitions" rule. That
+rule was written before this package had any real motion work to weigh it against;
+Phase 1.5's auth-screen redesign is a real, judged example, and it holds up fine
+under "does this motion mean something" — a step transition between sign-in and
+sign-up states, or a notice settling into place, is exactly the kind of relationship/
+feedback motion this doc has always said motion is *for*. The old rule cited
+`PRODUCT.md`'s "not an animation showcase" personality line; `PRODUCT.md` itself now
+says the same thing this section does — motion for its own sake is out of character,
+purposeful motion isn't.
+
+This still isn't a green light for decoration. Before adding motion, name what it
+communicates. If the honest answer is "it looks nice" *alone*, it doesn't ship. A page
+that transitions on every navigation, or a hover lift on every card, still reads as
+decoration unless it's actually telling the user something — apply the same judgment
+call, not a blanket yes.
+
+That said, purposeful motion should also be well-crafted, not just justified — a
+state transition that communicates correctly but looks janky or cheap has failed too.
+Three things every animation is checked against, together, not traded off against
+each other:
+
+- **Communicates something** (this section, above) — state, feedback, continuity,
+  relationship.
+- **Costs nothing real.** Animate `transform`/`opacity` (compositor-only, off the
+  main thread), not `width`/`height`/`top`/`left`/box-shadow spread or anything else
+  that triggers layout or paint. Keep it short (`--dur`/130ms is the package default
+  for a reason). Never block input, focus, or the next action on a decorative delay —
+  counter mode (`SPEC.md` UX-2) is this app's least forgiving surface for it, but the
+  rule is general, not counter-specific.
+- **Respects `prefers-reduced-motion`.** Non-negotiable, ships with the motion change
+  itself (see above), never retrofitted.
+
+A motion that fails any one of the three isn't ready, regardless of how well it does
+on the other two.
+
+## Ambient motion on pre-authentication surfaces
+
+The three gates above assume the working surface — a screen someone uses repeatedly
+to get something done, where motion earns its place by communicating a specific
+state change. A sign-in or sign-up screen is not that surface: it's seen once per
+session, at most, and its job is to establish what the product feels like before any
+work happens.
+
+On pre-authentication surfaces — sign-in, sign-up, marketing — ambient motion that
+establishes product character is permitted without communicating a specific state,
+provided it:
+
+- costs nothing when idle (no continuous animation loop running against a still
+  cursor or an unattended tab);
+- never runs on touch or under `prefers-reduced-motion` — neither has a cursor to
+  animate in response to, and both get the equivalent static state instead;
+- never delays input, focus, or submission on the actual sign-in/sign-up form; and
+- is `aria-hidden` — it is decoration for the surface, not content.
+
+This is narrow and deliberate. It does not license ambient motion on the
+authenticated working surfaces, where `SPEC.md` UX-2's latency budget and the three
+gates above still govern without exception.
 
 ---
 
 ## Known gaps (pre-existing, not yet fixed)
 
-- **No easing token.** Every transition falls back to the CSS default `ease`. Adding a
-  curve token (and deciding whether it should vary by interaction type) is a separate
-  design-system task.
+Formerly listed a missing easing token here. `--ease-out` and `--dur-step` were
+added (`design/tokens/tokens.json`'s `motion` group) once a real consumer —
+`DotField`'s Storybook entry and IMS-web's Phase 1.5 auth motion — needed them. No
+other easing curve exists yet; add one only when another real case needs it.

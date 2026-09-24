@@ -1,0 +1,36 @@
+/* Ported from the prototype's .auth-aside::before / .dotfield rules
+   (design/legacy/ims-ui-prototype.html, search "DOT FIELD"). The static
+   radial-gradient grid and the canvas share one --dotfield-mask custom
+   property (set by the consumer, e.g. AuthAside.module.css) so the swap
+   between them is invisible; --dotfield-gap is set inline from the `gap`
+   prop so the CSS grid's background-size can never drift from the canvas
+   grid's own spacing, unlike the prototype's two independent 24px literals. */
+.host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.host::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: var(--dotfield-gap) var(--dotfield-gap);
+  -webkit-mask-image: var(--dotfield-mask, none);
+  mask-image: var(--dotfield-mask, none);
+}
+.host[data-live]::before {
+  display: none;
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: var(--dotfield-mask, none);
+  mask-image: var(--dotfield-mask, none);
+}
+.canvas[hidden] {
+  display: none;
+}

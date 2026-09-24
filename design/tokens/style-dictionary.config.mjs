@@ -151,6 +151,8 @@ const config = {
           lines(byPath, ["zIndex"], Z_INDEX),
           `  --dur: ${byPath.get("motion/dur").$value};`,
           `  --dur-slow: ${byPath.get("motion/dur-slow").$value};`,
+          `  --dur-step: ${byPath.get("motion/dur-step").$value};`,
+          `  --ease-out: cubic-bezier(${byPath.get("motion/ease-out").$value.join(", ")});`,
         ].join("\n");
 
         const dark = [
