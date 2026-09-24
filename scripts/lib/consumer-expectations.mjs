@@ -16,6 +16,7 @@ export const EXPECTED_EXPORTS = [
   "ICON_NAMES",
   "BarChart",
   "Button",
+  "Checkbox",
   "Chip",
   "DataTable",
   "Metric",
@@ -29,6 +30,9 @@ export const EXPECTED_EXPORTS = [
   "Toast",
   "buildRingArcs",
   "RingGauge",
+  "DotField",
+  "buildDotGrid",
+  "stepDots",
 ];
 
 // Mirrors package.json's "exports" map plus the one CSS-module re-export
