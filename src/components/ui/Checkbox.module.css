@@ -3,6 +3,14 @@
    --lh-loose) per stylelint's token-only allowlist for these properties. */
 .chk {
   display: inline-flex;
+  /* An inline-flex box still reports a baseline to its own outer inline
+     context. By spec that baseline comes from a flex item's baseline unless
+     overridden, and toggling :checked's ::after pseudo-element inside the
+     checkbox input shifts what the browser treats as that baseline — which
+     shifted the checkbox's on-screen position by 2-3px on every check/uncheck
+     even though every element's own width/height stayed constant. Fixing the
+     alignment to the top edge removes the baseline dependency entirely. */
+  vertical-align: top;
   align-items: flex-start;
   gap: var(--s3);
   cursor: pointer;
