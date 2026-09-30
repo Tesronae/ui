@@ -1,0 +1,115 @@
+.card {
+  position: relative;
+}
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-med);
+  color: var(--ink-3);
+}
+.ownerLock {
+  display: inline-flex;
+  color: var(--ink-3);
+}
+.value {
+  margin-top: var(--s2);
+  font-family: var(--tight);
+  font-size: var(--fs-9);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.028em;
+  line-height: var(--lh-tightest);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur);
+}
+.value[data-reading="true"] {
+  color: var(--ink-2);
+}
+.spark {
+  position: relative;
+  height: 48px;
+  margin-top: var(--s5);
+  color: var(--ink-3);
+  outline: none;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+.spark[data-tone="good"] {
+  color: var(--pos);
+}
+.spark[data-tone="bad"] {
+  color: var(--neg);
+}
+.spark:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--accent);
+  border-radius: var(--r-sm);
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.line {
+  stroke-width: 1.75px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.crosshair {
+  position: absolute;
+  top: -4px;
+  bottom: 0;
+  width: 1px;
+  margin-inline-start: -0.5px;
+  background: var(--line);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- centers the 8px dot on its (left, top) point, see design/docs/principles.md */
+  margin: -4px 0 0 -4px;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- a circle, not a card radius */
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 2px var(--bg);
+  pointer-events: none;
+}
+.spark[data-reading="true"] .crosshair {
+  opacity: 1;
+}
+.dayLabel {
+  position: absolute;
+  top: -18px;
+  right: 0;
+  font-size: var(--fs-1);
+  color: var(--ink-3);
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- the standard visually-hidden recipe's -1px offset, see design/docs/principles.md */
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .value,
+  .crosshair {
+    transition: none;
+  }
+}

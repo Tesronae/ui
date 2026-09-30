@@ -19,6 +19,10 @@ export interface SparklineResult {
   linePath: string;
   areaPath: string;
   lastPoint: { x: number; y: number };
+  /** Every value's plotted (x, y), in input order — e.g. for a hover/scrub
+   * readout that needs to position a marker at an arbitrary index, not just
+   * the last one. */
+  points: { x: number; y: number }[];
 }
 
 export function buildSparkline(values: number[], options: SparklineOptions = {}): SparklineResult {
@@ -38,11 +42,12 @@ export function buildSparkline(values: number[], options: SparklineOptions = {})
       : ` L${+x(i)} ${+y(v)}`;
   });
 
+  const points = values.map((v, i) => ({ x: +x(i), y: +y(v) }));
   const lastIndex = values.length - 1;
-  const lastPoint = { x: +x(lastIndex), y: +y(values[lastIndex]!) };
+  const lastPoint = points[lastIndex]!;
   const areaPath = `${linePath} L${width} ${height} L0 ${height}Z`;
 
-  return { width, height, linePath, areaPath, lastPoint };
+  return { width, height, linePath, areaPath, lastPoint, points };
 }
 
 export interface BarsOptions {

@@ -38,6 +38,7 @@ API — see `README.md`):
 | Ring Gauge | `src/components/ui/RingGauge` | `RingGauge.stories.tsx` | yes |
 | Bar Chart | `src/components/ui/BarChart` | `BarChart.stories.tsx` | yes |
 | Sparkline | `src/components/ui/Sparkline` | `Sparkline.stories.tsx` | yes |
+| Trend Card | `src/components/ui/TrendCard` | `TrendCard.stories.tsx` | yes |
 | Checkbox | `src/components/ui/Checkbox` | `Checkbox.stories.tsx` | yes |
 | Segmented | `src/components/ui/Segmented` | `Segmented.stories.tsx` | yes |
 | Dot Field | `src/components/ui/DotField` | `DotField.stories.tsx` | yes |

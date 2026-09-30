@@ -21,6 +21,8 @@ export { Skeleton } from "./components/ui/Skeleton";
 export { Sparkline } from "./components/ui/Sparkline";
 export { TextField } from "./components/ui/TextField";
 export { Toast } from "./components/ui/Toast";
+export { TrendCard } from "./components/ui/TrendCard";
+export type { TrendCardDay } from "./components/ui/TrendCard";
 
 export { buildRingArcs } from "./components/ui/chart-math";
 export type { RingSegment } from "./components/ui/chart-math";
