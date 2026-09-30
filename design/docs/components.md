@@ -37,6 +37,7 @@ API — see `README.md`):
 | Bar Chart | `src/components/ui/BarChart` | `BarChart.stories.tsx` | yes |
 | Sparkline | `src/components/ui/Sparkline` | `Sparkline.stories.tsx` | yes |
 | Checkbox | `src/components/ui/Checkbox` | `Checkbox.stories.tsx` | yes |
+| Segmented | `src/components/ui/Segmented` | `Segmented.stories.tsx` | yes |
 | Dot Field | `src/components/ui/DotField` | `DotField.stories.tsx` | yes |
 
 `RingGauge` is the generic ring-chart primitive — a consuming app composes it into its

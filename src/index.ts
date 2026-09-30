@@ -11,6 +11,8 @@ export { Metric } from "./components/ui/Metric";
 export { Modal } from "./components/ui/Modal";
 export { Notice } from "./components/ui/Notice";
 export { Pill } from "./components/ui/Pill";
+export { Segmented } from "./components/ui/Segmented";
+export type { SegmentedOption } from "./components/ui/Segmented";
 export { Select } from "./components/ui/Select";
 export type { SelectOption } from "./components/ui/Select";
 export { Skeleton } from "./components/ui/Skeleton";
