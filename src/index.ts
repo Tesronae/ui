@@ -10,6 +10,8 @@ export type { Column } from "./components/ui/DataTable";
 export { Metric } from "./components/ui/Metric";
 export { Modal } from "./components/ui/Modal";
 export { Notice } from "./components/ui/Notice";
+export { Panel } from "./components/ui/Panel";
+export { PanelPair } from "./components/ui/PanelPair";
 export { Pill } from "./components/ui/Pill";
 export { Segmented } from "./components/ui/Segmented";
 export type { SegmentedOption } from "./components/ui/Segmented";

@@ -91,6 +91,7 @@ const COLOR = [
   "ring-1",
   "ring-2",
   "ring-3",
+  "sec-line",
 ];
 const ELEVATION = ["sh-1", "sh-2", "ring"];
 
