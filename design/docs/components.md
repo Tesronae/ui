@@ -29,6 +29,8 @@ API — see `README.md`):
 | Data Table | `src/components/ui/DataTable` | `DataTable.stories.tsx` | yes |
 | Pill | `src/components/ui/Pill` | `Pill.stories.tsx` | yes |
 | Notice | `src/components/ui/Notice` | `Notice.stories.tsx` | yes |
+| Panel | `src/components/ui/Panel` | `Panel.stories.tsx` | yes |
+| Panel Pair | `src/components/ui/PanelPair` | `PanelPair.stories.tsx` | yes |
 | Modal | `src/components/ui/Modal` | `Modal.stories.tsx` | yes |
 | Toast | `src/components/ui/Toast` | `Toast.stories.tsx` | yes |
 | Skeleton | `src/components/ui/Skeleton` | `Skeleton.stories.tsx` | yes |
@@ -36,7 +38,11 @@ API — see `README.md`):
 | Ring Gauge | `src/components/ui/RingGauge` | `RingGauge.stories.tsx` | yes |
 | Bar Chart | `src/components/ui/BarChart` | `BarChart.stories.tsx` | yes |
 | Sparkline | `src/components/ui/Sparkline` | `Sparkline.stories.tsx` | yes |
+| Trend Card | `src/components/ui/TrendCard` | `TrendCard.stories.tsx` | yes |
 | Checkbox | `src/components/ui/Checkbox` | `Checkbox.stories.tsx` | yes |
+| Segmented | `src/components/ui/Segmented` | `Segmented.stories.tsx` | yes |
+| Sheet | `src/components/ui/Sheet` | `Sheet.stories.tsx` | yes |
+| Accordion Row | `src/components/ui/AccordionRow` | `AccordionRow.stories.tsx` | yes |
 | Dot Field | `src/components/ui/DotField` | `DotField.stories.tsx` | yes |
 
 `RingGauge` is the generic ring-chart primitive — a consuming app composes it into its

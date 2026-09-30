@@ -1,6 +1,7 @@
 export { Icon, ICONS, ICON_NAMES } from "./components/Icon";
 export type { IconName } from "./components/Icon";
 
+export { AccordionRow } from "./components/ui/AccordionRow";
 export { BarChart } from "./components/ui/BarChart";
 export { Button } from "./components/ui/Button";
 export { Checkbox } from "./components/ui/Checkbox";
@@ -10,13 +11,20 @@ export type { Column } from "./components/ui/DataTable";
 export { Metric } from "./components/ui/Metric";
 export { Modal } from "./components/ui/Modal";
 export { Notice } from "./components/ui/Notice";
+export { Panel } from "./components/ui/Panel";
+export { PanelPair } from "./components/ui/PanelPair";
 export { Pill } from "./components/ui/Pill";
+export { Segmented } from "./components/ui/Segmented";
+export type { SegmentedOption } from "./components/ui/Segmented";
 export { Select } from "./components/ui/Select";
 export type { SelectOption } from "./components/ui/Select";
+export { Sheet } from "./components/ui/Sheet";
 export { Skeleton } from "./components/ui/Skeleton";
 export { Sparkline } from "./components/ui/Sparkline";
 export { TextField } from "./components/ui/TextField";
 export { Toast } from "./components/ui/Toast";
+export { TrendCard } from "./components/ui/TrendCard";
+export type { TrendCardDay } from "./components/ui/TrendCard";
 
 export { buildRingArcs } from "./components/ui/chart-math";
 export type { RingSegment } from "./components/ui/chart-math";

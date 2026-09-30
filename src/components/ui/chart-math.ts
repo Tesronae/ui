@@ -19,6 +19,10 @@ export interface SparklineResult {
   linePath: string;
   areaPath: string;
   lastPoint: { x: number; y: number };
+  /** Every value's plotted (x, y), in input order — e.g. for a hover/scrub
+   * readout that needs to position a marker at an arbitrary index, not just
+   * the last one. */
+  points: { x: number; y: number }[];
 }
 
 export function buildSparkline(values: number[], options: SparklineOptions = {}): SparklineResult {
@@ -38,11 +42,12 @@ export function buildSparkline(values: number[], options: SparklineOptions = {})
       : ` L${+x(i)} ${+y(v)}`;
   });
 
+  const points = values.map((v, i) => ({ x: +x(i), y: +y(v) }));
   const lastIndex = values.length - 1;
-  const lastPoint = { x: +x(lastIndex), y: +y(values[lastIndex]!) };
+  const lastPoint = points[lastIndex]!;
   const areaPath = `${linePath} L${width} ${height} L0 ${height}Z`;
 
-  return { width, height, linePath, areaPath, lastPoint };
+  return { width, height, linePath, areaPath, lastPoint, points };
 }
 
 export interface BarsOptions {
@@ -85,11 +90,15 @@ export function buildBars(values: number[], options: BarsOptions = {}): BarsResu
 }
 
 export interface RingSegment {
+  /** Identifies this segment for hover/click cross-highlight — must be
+   * stable and unique within one ring's segment list. */
+  id: string;
   value: number;
   color: string;
 }
 
 export interface RingArc {
+  id: string;
   color: string;
   dashArray: [number, number];
   dashOffset: number;
@@ -103,8 +112,11 @@ export interface RingArcsResult {
   arcs: RingArc[];
 }
 
-export function buildRingArcs(segments: RingSegment[], size = 104): RingArcsResult {
-  const radius = size / 2 - 8;
+export function buildRingArcs(segments: RingSegment[], size = 104, strokeWidth = 10): RingArcsResult {
+  // 1px breathing room outside the stroke, same as the design artifact's
+  // healthRing() — radius derives from the actual stroke width drawn, not a
+  // second, independently-hardcoded inset.
+  const radius = size / 2 - strokeWidth / 2 - 1;
   const circumference = 2 * Math.PI * radius;
   const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
 
@@ -114,6 +126,7 @@ export function buildRingArcs(segments: RingSegment[], size = 104): RingArcsResu
     if (segment.value <= 0) continue;
     const len = (segment.value / total) * circumference;
     arcs.push({
+      id: segment.id,
       color: segment.color,
       dashArray: [len, circumference - len],
       dashOffset: -offset,

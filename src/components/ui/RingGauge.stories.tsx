@@ -16,9 +16,9 @@ const meta = {
   },
   args: {
     segments: [
-      { value: 75, color: "--ring-1" },
-      { value: 15, color: "--ring-2" },
-      { value: 10, color: "--ring-3" },
+      { id: "healthy", value: 75, color: "--ring-1" },
+      { id: "low", value: 15, color: "--ring-2" },
+      { id: "out", value: 10, color: "--ring-3" },
     ],
     caption: "healthy",
   },
@@ -28,4 +28,23 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const ActiveSegment: Story = {
+  args: {
+    activeSegmentId: "out",
+    centerValue: "10",
+    centerCaption: "out of stock",
+  },
+};
+
+export const Interactive: Story = {
+  args: { onSegmentHover: () => {}, onSegmentClick: () => {} },
+  parameters: {
+    docs: {
+      description: {
+        story: "Hover/click targets are wider invisible arcs layered over the visible ones — only rendered when at least one handler is passed.",
+      },
+    },
+  },
+};
 

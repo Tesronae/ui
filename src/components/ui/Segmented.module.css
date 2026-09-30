@@ -1,0 +1,72 @@
+/* Sliding-indicator segmented control. Position and width of .indicator are
+   set from measured DOM geometry in Segmented.tsx (offsetLeft/offsetWidth of
+   the pressed button) and animated with a WAAPI tween between the previous
+   and next position — there is no CSS transition on transform/width here,
+   the component owns that timing so it can skip it under reduced motion and
+   on the very first mount (no previous position to tween from). */
+.group {
+  position: relative;
+  display: inline-flex;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- sub-scale track gap, see design/docs/principles.md */
+  gap: 2px;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- sub-scale track inset, see design/docs/principles.md */
+  padding: 3px;
+  border-radius: var(--r);
+  background: var(--fill);
+}
+.indicator {
+  position: absolute;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- hugs the 3px track inset above, see design/docs/principles.md */
+  top: 3px;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- hugs the 3px track inset above, see design/docs/principles.md */
+  bottom: 3px;
+  left: 0;
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  box-shadow: var(--sh-1);
+  pointer-events: none;
+}
+.segment {
+  position: relative;
+  /* --z-icon is the token scale's lowest layer (1) — reused here to sit the
+     label above .indicator, not for any icon-specific meaning. */
+  z-index: var(--z-icon);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 28px;
+  padding-inline: var(--s3);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: none;
+  color: var(--ink-2);
+  font: inherit;
+  font-size: var(--fs-2);
+  font-weight: var(--fw-med);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--dur);
+}
+.segment:hover {
+  color: var(--ink);
+}
+.segment[aria-pressed="true"] {
+  color: var(--ink);
+  font-weight: var(--fw-bold);
+}
+.segment:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.segment:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.count {
+  font-size: var(--fs-1);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.segment[aria-pressed="true"] .count {
+  color: var(--ink-2);
+}

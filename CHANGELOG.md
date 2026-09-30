@@ -6,6 +6,56 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-30
+
+Phase 1.5 dashboard redesign primitives (`IMS-web` W1.5.8-W1.5.10, W1.5.14).
+
+- Added: `Segmented` component — a single-select filter group with a
+  sliding indicator (`.sg-group`/`.sg-ind` in the design artifact),
+  measured from the pressed button's DOM position and WAAPI-tweened
+  between states; empty buckets disable rather than hide. Extracted from
+  the `role="group"`/`aria-pressed` pattern `IMS-web`'s `Counter.tsx` had
+  hand-rolled.
+- Added: `Panel`/`PanelPair` components — a hairline-bordered section
+  surface (title/header-extra/body/footer slots) and a two-up layout
+  using real CSS subgrid so both panels' header/body/footer rows stay
+  aligned regardless of which side's body is taller, degrading to
+  stacked flex under its own container query. New token: `--sec-line`
+  (`design/tokens/tokens.json`) — `--sec-bg`/`--sec-r` already had exact
+  equivalents (`var(--bg)`/`var(--r-lg)`), so no duplicate tokens.
+- Added: `TrendCard` component — a KPI/stat card with a 14-point
+  sparkline (line + area wash) whose value swaps for the exact scrubbed
+  day's figure on pointer move, focus, or Arrow/Home/End keys, announced
+  via `aria-live`; `tone` (good/bad/neutral) coloring; an owner-only lock
+  badge. `days[].value` is presentation-only (curve shape), matching
+  `Sparkline`/`BarChart`'s existing plain-`number[]` precedent — the
+  caller supplies the exact display text separately, through its own
+  decimal library.
+- Added: `Sheet`/`AccordionRow` components — a generic scrim + edge-
+  anchored panel shell (right-side inset panel ≥721px, bottom sheet
+  below it) with Escape-to-close, a Tab/Shift+Tab focus trap, drag-to-
+  dismiss on touch (rubber-band resistance, dismiss past 25% or a flick,
+  skipped entirely under reduced motion), and body-scroll lock; a fully
+  controlled collapsible action row for the sheet's body. Domain content
+  (which action a row represents, its API call) is deliberately not
+  part of this package — see `IMS-web`'s own `AGENTS.md` "no consumer-
+  specific behaviour".
+- Changed (breaking): `RingGauge`/`RingSegment`/`buildRingArcs` —
+  `RingSegment` gains a required `id` field (needed to identify which
+  arc was hovered/clicked). `buildRingArcs` gains an explicit
+  `strokeWidth` parameter; `radius` now derives from it
+  (`size/2 - strokeWidth/2 - 1`) instead of a second, disconnected
+  hardcoded inset — the default-size/width radius moves from 44px to
+  46px. `RingGauge` gains `strokeWidth`, `centerValue`/`centerCaption`
+  overrides (the center text is no longer hardcoded to "first segment's
+  percent share"), `activeSegmentId`/`onSegmentHover`/`onSegmentClick`
+  (wider invisible hit-arcs, only rendered when a handler is passed),
+  and a stroke-dasharray draw-in animation on mount (skipped under
+  reduced motion).
+- Changed: `chart-math.ts`'s `buildSparkline` gains a `points` array
+  (every value's plotted x/y, not just the last one) — additive;
+  existing `Sparkline`/`BarChart` callers are unaffected.
+
 ## [0.1.6] - 2026-09-24
 
 - Fixed: `Checkbox` shifted 2-3px vertically every time it was toggled. The

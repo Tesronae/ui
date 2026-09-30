@@ -10,3 +10,22 @@
 .caption {
   fill: var(--ink-3);
 }
+.arc {
+  transition: opacity var(--dur);
+}
+.arcDimmed {
+  opacity: 0.22;
+  transition: opacity var(--dur);
+}
+/* Invisible, wider than the visible arc so hover/click has a forgiving
+   target without changing the drawn stroke width. */
+.hit {
+  stroke: transparent;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arc,
+  .arcDimmed {
+    transition: none;
+  }
+}

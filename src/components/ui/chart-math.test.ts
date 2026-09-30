@@ -44,35 +44,40 @@ describe("buildBars — ported from the prototype's bars()", () => {
   });
 });
 
-describe("buildRingArcs — ported from the prototype's ring()", () => {
+describe("buildRingArcs — ported from the prototype's ring(), radius from strokeWidth", () => {
   it("matches the prototype's exact arc geometry and percentage for a known input", () => {
-    // Hand-computed from ring([{v:75,c:'--ring-1'},{v:25,c:'--ring-3'}], 104):
-    // r = 104/2 - 8 = 44, C = 2*PI*44 = 276.4601...
+    // r = 104/2 - 10/2 - 1 = 46, C = 2*PI*46 = 289.0265...
     // total=100, pct=round(75/100*100)=75
-    // seg1: len = 75/100*C = 207.345..., offset 0
-    // seg2: len = 25/100*C = 69.115..., offset -207.345...
+    // seg1: len = 75/100*C = 216.7699..., offset 0
+    // seg2: len = 25/100*C = 72.2566..., offset -216.7699...
     const { radius, circumference, percent, arcs } = buildRingArcs(
       [
-        { value: 75, color: "--ring-1" },
-        { value: 25, color: "--ring-3" },
+        { id: "healthy", value: 75, color: "--ring-1" },
+        { id: "out", value: 25, color: "--ring-3" },
       ],
       104,
     );
-    expect(radius).toBe(44);
-    expect(circumference).toBeCloseTo(276.4601, 3);
+    expect(radius).toBe(46);
+    expect(circumference).toBeCloseTo(289.0265, 3);
     expect(percent).toBe(75);
     expect(arcs).toHaveLength(2);
-    expect(arcs[0]).toMatchObject({ color: "--ring-1", dashOffset: -0 });
-    expect(arcs[0]?.dashArray[0]).toBeCloseTo(207.3451, 3);
-    expect(arcs[1]).toMatchObject({ color: "--ring-3" });
-    expect(arcs[1]?.dashOffset).toBeCloseTo(-207.3451, 3);
+    expect(arcs[0]).toMatchObject({ id: "healthy", color: "--ring-1", dashOffset: -0 });
+    expect(arcs[0]?.dashArray[0]).toBeCloseTo(216.7699, 3);
+    expect(arcs[1]).toMatchObject({ id: "out", color: "--ring-3" });
+    expect(arcs[1]?.dashOffset).toBeCloseTo(-216.7699, 3);
+  });
+
+  it("derives radius from an explicit strokeWidth", () => {
+    // r = 128/2 - 22/2 - 1 = 52, matching the design artifact's healthRing() (sz:128, sw:22)
+    const { radius } = buildRingArcs([{ id: "a", value: 1, color: "--ring-1" }], 128, 22);
+    expect(radius).toBe(52);
   });
 
   it("omits a zero-value segment entirely, matching the prototype's filter(x => x.v > 0)", () => {
     const { arcs } = buildRingArcs(
       [
-        { value: 100, color: "--ring-1" },
-        { value: 0, color: "--ring-2" },
+        { id: "healthy", value: 100, color: "--ring-1" },
+        { id: "low", value: 0, color: "--ring-2" },
       ],
       104,
     );
@@ -80,6 +85,6 @@ describe("buildRingArcs — ported from the prototype's ring()", () => {
   });
 
   it("falls back total to 1 when every segment is 0, avoiding divide-by-zero", () => {
-    expect(() => buildRingArcs([{ value: 0, color: "--ring-1" }], 104)).not.toThrow();
+    expect(() => buildRingArcs([{ id: "a", value: 0, color: "--ring-1" }], 104)).not.toThrow();
   });
 });

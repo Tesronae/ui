@@ -1,0 +1,64 @@
+.row {
+  border: 1px solid var(--sec-line);
+  border-radius: var(--r);
+  background: var(--bg);
+}
+.row[data-open="true"] {
+  border-color: var(--ink);
+  background: var(--sunken);
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--s3) var(--s4);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: start;
+}
+.header:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--r);
+}
+.header svg {
+  flex-shrink: 0;
+  color: var(--ink-4);
+  transition: transform var(--dur);
+}
+.header[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- sub-scale title/summary gap, see design/docs/principles.md */
+  gap: 2px;
+}
+.title {
+  font-size: var(--fs-3);
+  font-weight: var(--fw-bold);
+  color: var(--ink);
+}
+.summary {
+  font-size: var(--fs-2);
+  color: var(--ink-2);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: 0 var(--s4) var(--s4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .header svg {
+    transition: none;
+  }
+}

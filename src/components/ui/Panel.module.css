@@ -1,0 +1,45 @@
+/* Section/panel surface — a hairline-bordered card, the base every
+   dashboard-style panel sits in. Ported from the design artifact's
+   --sec-bg/--sec-line/--sec-r token system (design/docs/ dashboard notes):
+   --sec-bg resolves to the plain page background (var(--bg)) and --sec-r to
+   the existing var(--r-lg) — both already covered by tokens this package
+   has, so only --sec-line (a hairline distinct from the default var(--line))
+   was added to design/tokens/tokens.json. */
+/* No display/flex-direction here on purpose — a standalone .panel is plain
+   block flow (header/body/footer already stack top to bottom by default).
+   PanelPair.module.css's .pairItem is the only place that sets display on a
+   paired panel, so the two rules never compete over the same property. */
+.panel {
+  background: var(--bg);
+  border: 1px solid var(--sec-line);
+  border-radius: var(--r-lg);
+  padding: var(--s6);
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding-bottom: var(--s4);
+}
+.title {
+  font-family: var(--tight);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.012em;
+}
+.body {
+  min-width: 0;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding-top: var(--s4);
+  margin-top: var(--s4);
+  border-top: 1px solid var(--line-2);
+}
+@media (max-width: 720px) {
+  .panel {
+    padding: var(--s4);
+  }
+}
