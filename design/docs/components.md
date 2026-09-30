@@ -41,6 +41,8 @@ API — see `README.md`):
 | Trend Card | `src/components/ui/TrendCard` | `TrendCard.stories.tsx` | yes |
 | Checkbox | `src/components/ui/Checkbox` | `Checkbox.stories.tsx` | yes |
 | Segmented | `src/components/ui/Segmented` | `Segmented.stories.tsx` | yes |
+| Sheet | `src/components/ui/Sheet` | `Sheet.stories.tsx` | yes |
+| Accordion Row | `src/components/ui/AccordionRow` | `AccordionRow.stories.tsx` | yes |
 | Dot Field | `src/components/ui/DotField` | `DotField.stories.tsx` | yes |
 
 `RingGauge` is the generic ring-chart primitive — a consuming app composes it into its

@@ -1,6 +1,7 @@
 export { Icon, ICONS, ICON_NAMES } from "./components/Icon";
 export type { IconName } from "./components/Icon";
 
+export { AccordionRow } from "./components/ui/AccordionRow";
 export { BarChart } from "./components/ui/BarChart";
 export { Button } from "./components/ui/Button";
 export { Checkbox } from "./components/ui/Checkbox";
@@ -17,6 +18,7 @@ export { Segmented } from "./components/ui/Segmented";
 export type { SegmentedOption } from "./components/ui/Segmented";
 export { Select } from "./components/ui/Select";
 export type { SelectOption } from "./components/ui/Select";
+export { Sheet } from "./components/ui/Sheet";
 export { Skeleton } from "./components/ui/Skeleton";
 export { Sparkline } from "./components/ui/Sparkline";
 export { TextField } from "./components/ui/TextField";
