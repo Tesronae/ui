@@ -6,6 +6,24 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-06
+
+`IMS-web` W1.5.33.
+
+- Added: `TintedNotice` component — a tinted-surface banner (background,
+  border and icon all carry the tone color, `neg`/`warn`/`pos`/`info`) with
+  an optional dismiss button and a mount/dismiss WAAPI entrance per tone,
+  honoring `prefers-reduced-motion`. Distinct from `Notice`, which keeps a
+  neutral surface plus a 3px edge stripe for a supporting aside next to
+  other content; `TintedNotice` is for a state that is itself the point (a
+  completed action, a session/connectivity notice, a stock alert). Two
+  layouts: `"stacked"` (a bordered icon chip, action below the body) and
+  `"inline"` (a bare tone-colored icon, action beside the body, wrapping to
+  a full-width row under its own 436px container query). Promoted from
+  `IMS-web`'s auth-only `AuthNotice` — supersedes the earlier, unreleased
+  `TintedNotice` draft on the now-abandoned `phase1.5-tinted-notice` branch,
+  which shipped CSS-keyframe motion and no tone-driven icon chip color.
+
 ## [0.2.0] - 2026-09-30
 
 Phase 1.5 dashboard redesign primitives (`IMS-web` W1.5.8-W1.5.10, W1.5.14).

@@ -1,0 +1,188 @@
+/* Tinted surface + icon, promoted from IMS-web's `AuthNotice.module.css`
+   (itself ported from the design artifact's `.anb` rules) — background,
+   border and icon all carry the tone color together, unlike Notice's
+   neutral-surface-plus-edge-stripe. Colour comes from each tone's existing
+   soft/line token pair via local custom properties (--t/--t-soft/--t-line/
+   --t-ink), matching the artifact's own scheme exactly. */
+
+/* Height-FLIP wrapper: JS grows this from 0fr to 1fr on mount and back on
+   dismiss (TintedNotice.tsx) by animating grid-template-rows, which only
+   works as a genuine layout transition on a grid track — a plain
+   max-height animation can't reach an intrinsic "auto" end state cleanly.
+   Also the query container for the narrow/stacked-action layout below. */
+.wrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  container-type: inline-size;
+}
+.wrapIn {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.notice {
+  --t: var(--ink-2);
+  --t-soft: var(--sunken);
+  --t-line: var(--line);
+  --t-ink: var(--ink-2);
+  position: relative;
+  display: flex;
+  gap: var(--s3);
+  align-items: flex-start;
+  padding: var(--s3);
+  border: 1px solid var(--t-line);
+  border-radius: var(--r-lg);
+  background: var(--t-soft);
+  color: var(--ink);
+}
+.neg {
+  --t: var(--neg);
+  --t-soft: var(--neg-soft);
+  --t-line: var(--neg-line);
+  --t-ink: color-mix(in oklab, var(--neg) 30%, var(--ink-2));
+}
+.warn {
+  --t: var(--warn);
+  --t-soft: var(--warn-soft);
+  --t-line: var(--warn-line);
+  --t-ink: color-mix(in oklab, var(--warn) 30%, var(--ink-2));
+}
+.pos {
+  --t: var(--pos);
+  --t-soft: var(--pos-soft);
+  --t-line: var(--pos-line);
+  --t-ink: color-mix(in oklab, var(--pos) 30%, var(--ink-2));
+}
+/* Restates the base defaults explicitly — `tone` always interpolates a
+   class name, and omitting this rule left tone="info" resolving to an
+   undefined CSS Modules key (no visible defect, since .notice's own
+   defaults already matched, but an undefined class in the DOM all the
+   same). */
+.info {
+  --t: var(--ink-2);
+  --t-soft: var(--sunken);
+  --t-line: var(--line);
+  --t-ink: var(--ink-2);
+}
+
+/* layout="stacked" (default): bordered icon chip, action inside .body. */
+.stacked .chip {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r);
+  background: var(--bg);
+  border: 1px solid var(--t-line);
+  color: var(--t);
+}
+
+/* layout="inline": bare tone-colored icon (no chip box), action sits
+   beside .body as its own flex cell. The dashboard negative-stock
+   banner's shape (v26's `.dash-anb`). */
+.inline {
+  padding: var(--s3) var(--s4);
+  align-items: center;
+}
+.inline .chip {
+  width: 18px;
+  align-self: flex-start;
+  margin-top: 2px;
+  color: var(--t);
+}
+.inlineAction {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.chip {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+.body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+.stacked .body {
+  padding-top: 2px;
+}
+.inline .body {
+  padding-top: 0;
+}
+.title {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-3);
+}
+.notice p {
+  font-size: var(--fs-2);
+  color: var(--t-ink);
+  margin-top: var(--s1);
+  line-height: var(--lh-loose);
+}
+.actions {
+  margin-top: var(--s2);
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.dismiss {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-top: 1px;
+  margin-inline-end: -2px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--t-ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color var(--dur), color var(--dur);
+}
+.dismiss::before {
+  /* Widen the hit target past the visible 28px box without growing layout. */
+  content: "";
+  position: absolute;
+  inset: -6px;
+}
+.dismiss:hover {
+  background: color-mix(in oklab, var(--t) 10%, transparent);
+  color: var(--ink);
+}
+
+/* Narrow container: the inline action cell drops to its own full-width
+   row under the text, indented to the icon column. 436px derives the same
+   way IMS-web's `.panelPair` 536px trigger does (W1.5.31): the artifact's
+   720px viewport rule minus a 236px fixed sidebar minus 48px of page
+   padding — translated to a container query (not re-used as a media
+   query) because this banner's available width is not a fixed function of
+   viewport width once the sidebar itself becomes a bottom nav at 720px. */
+@container (max-width: 436px) {
+  .inline {
+    flex-wrap: wrap;
+  }
+  .inline .body {
+    flex: 1 1 100%;
+  }
+  .inlineAction {
+    width: 100%;
+    padding-inline-start: calc(18px + var(--s3));
+  }
+  .inlineAction > * {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap {
+    /* TintedNotice.tsx skips the grid-row and per-tone WAAPI sequences
+       under reduced motion and plays a single short opacity fade instead
+       — this rule only guards a JS animation failing to attach (no-JS, a
+       test environment without Element.animate) from leaving the wrapper
+       visibly collapsed at 0fr. */
+    grid-template-rows: 1fr;
+  }
+}

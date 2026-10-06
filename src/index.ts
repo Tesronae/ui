@@ -25,6 +25,8 @@ export { TextField } from "./components/ui/TextField";
 export { Toast } from "./components/ui/Toast";
 export { TrendCard } from "./components/ui/TrendCard";
 export type { TrendCardDay } from "./components/ui/TrendCard";
+export { TintedNotice } from "./components/ui/TintedNotice";
+export type { TintedNoticeTone } from "./components/ui/TintedNotice";
 
 export { buildRingArcs } from "./components/ui/chart-math";
 export type { RingSegment } from "./components/ui/chart-math";
