@@ -118,13 +118,11 @@ Every `font-size`, `line-height`, `font-weight`, and `z-index` declaration in
 
 ### Type scale
 
-Ten steps, `--fs-0` through `--fs-9`. Values collapsed from the 14 literals ported
-verbatim from the legacy prototype; where two adjacent half-pixel literals existed
-(e.g. `12px`/`12.5px`), the less-used one was rounded into whichever value already had
-more call sites, so the merge changes the fewest declarations. `--fs-5: 16px` is the one
-exception kept exact rather than rounded — it is the mobile input font-size on
-`Counter`'s scan and quantity fields, where anything under 16px triggers iOS Safari's
-auto-zoom-on-focus. Do not round it toward `--fs-4`/`--fs-6`.
+The base steps remain `--fs-0` through `--fs-9`. Intermediate steps
+`--fs-2-5`, `--fs-3-5`, `--fs-6-5`, `--fs-7-5`, and `--fs-8-5` support
+precise caption, row, chart and total hierarchies without changing existing
+consumers. Values live only in `tokens.json`. `--fs-5` remains the mobile
+input size: smaller text triggers iOS Safari auto-zoom on focus.
 
 ### Line height
 

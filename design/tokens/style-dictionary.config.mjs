@@ -41,11 +41,11 @@ function lines(byPath, prefix, names) {
     .join("\n");
 }
 
-const SPACING = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"];
+const SPACING = ["s-micro", "s-fine", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"];
 const RADIUS = ["r-sm", "r", "r-lg", "r-full"];
 const FONT = ["sans", "tight", "mono"];
-const FONT_SIZE = ["fs-0", "fs-1", "fs-2", "fs-3", "fs-4", "fs-5", "fs-6", "fs-7", "fs-8", "fs-9"];
-const LINE_HEIGHT = ["lh-tightest", "lh-tight", "lh", "lh-loose", "lh-box"];
+const FONT_SIZE = ["fs-0", "fs-1", "fs-2", "fs-2-5", "fs-3", "fs-3-5", "fs-4", "fs-5", "fs-6", "fs-6-5", "fs-7", "fs-7-5", "fs-8", "fs-8-5", "fs-9"];
+const LINE_HEIGHT = ["lh-display", "lh-label", "lh-tightest", "lh-tight", "lh", "lh-loose", "lh-box"];
 const FONT_WEIGHT = ["fw", "fw-med", "fw-bold"];
 const Z_INDEX = [
   "z-icon",
@@ -132,13 +132,13 @@ const config = {
         const byPath = new Map(dictionary.allTokens.map((token) => [token.path.join("/"), token]));
 
         const root = [
-          "  /* spacing — 4px base, the only values allowed */",
+          "  /* spacing — 4px base with fine optical steps */",
           lines(byPath, ["spacing"], SPACING),
           "  /* radius */",
           lines(byPath, ["radius"], RADIUS),
           '  /* type — next/font/google\'s generated variables (src/styles/fonts.ts), not\n     a Google Fonts @import */',
           lines(byPath, ["font"], FONT),
-          "  /* type scale — every font-size in the product collapses to these 10 steps */",
+          "  /* type scale — base steps plus intermediate sizes */",
           lines(byPath, ["fontSize"], FONT_SIZE),
           "  /* line height — unitless except lh-box, which matches a fixed single-line\n     box height (kbd hint, select option row), not body copy */",
           lines(byPath, ["lineHeight"], LINE_HEIGHT),
@@ -150,6 +150,8 @@ const config = {
           lines(byPath, ["elevation", "light"], ELEVATION),
           "  /* stacking order, low to high */",
           lines(byPath, ["zIndex"], Z_INDEX),
+          `  --dur-press: ${byPath.get("motion/dur-press").$value};`,
+          `  --dur-fade: ${byPath.get("motion/dur-fade").$value};`,
           `  --dur: ${byPath.get("motion/dur").$value};`,
           `  --dur-slow: ${byPath.get("motion/dur-slow").$value};`,
           `  --dur-step: ${byPath.get("motion/dur-step").$value};`,
