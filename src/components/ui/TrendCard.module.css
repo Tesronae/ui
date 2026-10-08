@@ -5,6 +5,9 @@
   display: flex;
   align-items: center;
   gap: var(--s2);
+  /* v26 reserves a 26px header so a date can replace a compact delta
+     without moving the value or sparkline. */
+  min-height: var(--fs-8-5);
 }
 .label {
   display: flex;
@@ -13,6 +16,7 @@
   font-size: var(--fs-1);
   font-weight: var(--fw-med);
   color: var(--ink-3);
+  white-space: nowrap;
 }
 .ownerLock {
   display: inline-flex;
@@ -89,6 +93,8 @@
   opacity: 1;
 }
 .dayLabel {
+  flex-shrink: 0;
+  white-space: nowrap;
   margin-inline-start: auto;
   font-size: var(--fs-1);
   color: var(--ink-3);

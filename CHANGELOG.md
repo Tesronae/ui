@@ -6,6 +6,12 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.6] - 2026-10-09
+
+- Fixed: `TrendCard` reserves a stable header height and keeps the label and
+  scrubbed date on one line, preventing values and sparklines from jumping
+  when hover or keyboard focus replaces the delta with a date (IMS W1.5.52).
+
 ## [0.3.5] - 2026-10-09
 
 - Added: `Pill` gains `size="compact"` — a smaller, fully-rounded shape
