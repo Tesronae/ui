@@ -6,6 +6,14 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-08
+
+- Added: intermediate typography (12.5, 13.5, 19, 22, 26px), display/label
+  line heights (1.1/1.3), fine spacing (3/5px), and press/fade durations
+  (120/160ms). Existing token values are unchanged. Candidate for IMS-web
+  W1.5.36. No breaking changes or component migrations. Consumers can use
+  the new variables after an exact-pin upgrade; existing styles need no edits.
+
 ## [0.3.0] - 2026-10-06
 
 `IMS-web` W1.5.33.
