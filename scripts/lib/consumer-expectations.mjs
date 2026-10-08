@@ -68,3 +68,15 @@ export function verifyPackedFiles(pkgRootDir, expected = EXPECTED_PACKED_FILES) 
     throw new Error(`missing packed file(s): ${missing.join(", ")}`);
   }
 }
+
+
+export function verifySheetTokens(css) {
+  const declarations = [
+    "--sheet-floating-width: 600px;",
+    "--sheet-floating-inset: 10px;",
+    "--sheet-floating-radius: 14px;",
+    "--sheet-mobile-max-height: 88dvh;",
+  ];
+  const missing = declarations.filter((declaration) => !css.includes(declaration));
+  if (missing.length) throw new Error(`missing/incorrect packed Sheet token(s): ${missing.join(", ")}`);
+}

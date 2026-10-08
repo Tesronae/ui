@@ -6,6 +6,23 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-10-08
+
+- Added: opt-in `Sheet` `presentation="floating"` (600px maximum desktop
+  width, 10px insets, 14px radius; mobile bottom sheet capped at 88dvh) and
+  generic `headerLeading` slot. Header/footer stay fixed while body scrolls.
+- Fixed: focus restoration, hidden/inert/disabled control exclusion, radio
+  group tab stops, keyboard access to read-only scrolling content, RTL drag
+  direction and cancelled gesture dismissal.
+  Floating snapback uses shared motion tokens and respects reduced motion.
+- Verification: packed-consumer gate now checks actual Sheet CSS token values,
+  preventing a formatter omission from silently removing layout constraints.
+- Migration: existing `Sheet` calls retain `presentation="edge"` by default;
+  no required call-site changes. After an approved exact-pin upgrade, opt into
+  floating layout and supply optional `headerLeading` content. The candidate
+  requires manual screen-reader review and named-commit owner approval before
+  publication/adoption. Rollback restores the prior version and lockfile.
+
 ## [0.3.2] - 2026-10-08
 
 - Added: `TextField` gains `min`/`max`/`step` (passed through to the native
