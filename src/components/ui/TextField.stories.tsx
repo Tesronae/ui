@@ -47,3 +47,18 @@ export const Disabled: Story = {
   args: { disabled: true, value: "Al Quoz Auto Spares" },
 };
 
+export const Inline: Story = {
+  args: {
+    label: "Show what expires within",
+    value: "90",
+    placeholder: undefined,
+    type: "number",
+    inputMode: "numeric",
+    inline: true,
+    narrow: true,
+    suffix: "days",
+    min: 1,
+    max: 730,
+  },
+};
+

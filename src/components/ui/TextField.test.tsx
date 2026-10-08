@@ -52,4 +52,35 @@ describe("TextField", () => {
     render(<TextField label="x" value="" onChange={() => {}} disabled />);
     expect(screen.getByLabelText("x")).toBeDisabled();
   });
+
+  it("passes min/max/step to the native input", () => {
+    render(<TextField label="Window" value="90" onChange={() => {}} type="number" min={1} max={730} step={1} />);
+    const input = screen.getByLabelText("Window");
+    expect(input).toHaveAttribute("min", "1");
+    expect(input).toHaveAttribute("max", "730");
+    expect(input).toHaveAttribute("step", "1");
+  });
+
+  it("renders label, input and suffix on one row when inline, with a narrow centered input", () => {
+    render(
+      <TextField
+        label="Show what expires within"
+        value="90"
+        onChange={() => {}}
+        type="number"
+        inline
+        narrow
+        suffix="days"
+      />,
+    );
+    const input = screen.getByLabelText("Show what expires within");
+    expect(screen.getByText("days")).toBeInTheDocument();
+    expect(input.parentElement).toContainElement(screen.getByText("Show what expires within"));
+    expect(input.parentElement).toContainElement(screen.getByText("days"));
+  });
+
+  it("omits the suffix when not given, even inline", () => {
+    render(<TextField label="Window" value="90" onChange={() => {}} inline />);
+    expect(screen.queryByText("days")).not.toBeInTheDocument();
+  });
 });

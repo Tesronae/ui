@@ -44,3 +44,31 @@
   color: var(--neg);
   margin-top: var(--s1);
 }
+
+/* Label, input and unit on one row — ported from the prototype's `.xw`
+   (Craten Dashboard v26's "Show what expires within [90] days"). */
+.fieldInline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+}
+.fieldInline .label {
+  margin-bottom: 0;
+}
+.suffix {
+  color: var(--ink-3);
+  font-size: var(--fs-2);
+}
+.narrow {
+  width: 64px;
+  text-align: center;
+}
+.narrow[type="number"] {
+  -moz-appearance: textfield;
+}
+.narrow::-webkit-outer-spin-button,
+.narrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

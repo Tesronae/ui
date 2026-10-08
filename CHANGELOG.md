@@ -6,6 +6,17 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-10-08
+
+- Added: `TextField` gains `min`/`max`/`step` (passed through to the native
+  input) and an `inline` layout — label, input and an optional trailing
+  `suffix` unit on one row, instead of the default label-above-input stack —
+  plus a `narrow` modifier (fixed width, centered text, no native spin-button
+  arrows) for a short bounded numeric field read as one sentence (e.g. "Show
+  what expires within [90] days"). Candidate for IMS-web W1.5.37. All five
+  additions are optional; no existing call site's rendered output or props
+  change.
+
 ## [0.3.1] - 2026-10-08
 
 - Added: intermediate typography (12.5, 13.5, 19, 22, 26px), display/label
