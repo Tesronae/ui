@@ -89,9 +89,7 @@
   opacity: 1;
 }
 .dayLabel {
-  position: absolute;
-  top: -18px;
-  right: 0;
+  margin-inline-start: auto;
   font-size: var(--fs-1);
   color: var(--ink-3);
 }

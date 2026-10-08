@@ -17,4 +17,10 @@ describe("Pill", () => {
       expect(neutral.firstElementChild?.className).not.toEqual(variantEl.firstElementChild?.className);
     },
   );
+
+  it("applies a distinct class for the compact size", () => {
+    const { container: defaultEl } = render(<Pill>x</Pill>);
+    const { container: compactEl } = render(<Pill size="compact">x</Pill>);
+    expect(defaultEl.firstElementChild?.className).not.toEqual(compactEl.firstElementChild?.className);
+  });
 });

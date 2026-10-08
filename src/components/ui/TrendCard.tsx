@@ -117,7 +117,11 @@ export function TrendCard({
             </span>
           ) : null}
         </span>
-        {readingIndex === null ? delta : null}
+        {readingIndex === null ? (
+          delta
+        ) : reading ? (
+          <span className={styles.dayLabel}>{reading.label}</span>
+        ) : null}
       </div>
       <div className={styles.value} data-reading={readingIndex !== null}>
         {readingIndex === null ? value : reading?.formatted}
@@ -164,11 +168,6 @@ export function TrendCard({
             aria-hidden="true"
             style={{ left: `${(point.x / WIDTH) * 100}%`, top: `${(point.y / HEIGHT) * 100}%` }}
           />
-        ) : null}
-        {readingIndex !== null && reading ? (
-          <span className={styles.dayLabel} aria-hidden="true">
-            {reading.label}
-          </span>
         ) : null}
       </div>
       <span className={styles.sr} aria-live="polite" ref={liveRef} />
