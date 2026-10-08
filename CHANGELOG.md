@@ -6,7 +6,12 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
-## [0.3.3] - 2026-10-08
+## [0.3.4] - 2026-10-08
+
+- Fixed: generate tokens before unit tests in the Publish workflow, matching CI.
+  Version 0.3.3 failed before publication; 0.3.4 includes its Sheet changes.
+
+## [0.3.3] - 2026-10-08 (not published)
 
 - Added: opt-in `Sheet` `presentation="floating"` (600px maximum desktop
   width, 10px insets, 14px radius; mobile bottom sheet capped at 88dvh) and
