@@ -125,3 +125,25 @@ Do not treat hover-only behaviour as the complete interaction design.
 - Human design review for a material change here follows `IMS-web`'s `DESIGN.md` §5
   (named-commit approval) — this repository keeps no separate `design/reviews/`
   directory of its own; that dated-approval convention is `IMS-web`'s.
+
+### Sheet floating candidate
+
+`Sheet` retains its default `presentation="edge"`. Opt into
+`presentation="floating"` for a desktop panel no wider than 600px, inset 10px,
+with a 14px radius, or a bottom sheet capped at 88dvh below 721px. The optional
+`headerLeading` slot accepts generic media or an icon before the title. The
+existing `footer` remains outside the scrolling body; keep primary actions there.
+The header and footer do not shrink when body content overflows.
+
+Opening focuses the first available control, Tab stays inside the dialog,
+Escape and the scrim close it, and closing restores focus to the opener if it
+still exists. Hidden, inert, disabled and negative-tabindex elements are excluded
+from the trap. The scrolling body is focusable for keyboard scrolling even when
+it contains only read-only text. Radio groups expose one tab stop. The panel follows text direction
+on desktop and drags toward the corresponding edge. Pointer cancellation returns
+it to rest without dismissing; floating snapback uses shared motion tokens and is
+removed under reduced motion, along with dragging. Consumers supply translated
+`closeLabel` and all content. Review `Floating` and `FloatingLongContent` in both
+themes, direction settings, narrow viewports and reduced motion. This candidate
+still needs manual screen-reader review and named-commit human approval before
+release/adoption.

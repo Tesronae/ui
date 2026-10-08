@@ -11,7 +11,7 @@
 // package's own src/index.ts without any manual path aliasing, the same
 // way a real bundler would resolve peer dependencies.
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readdirSync, rmSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { join } from "node:path";
 import { createElement } from "react";
@@ -20,6 +20,7 @@ import {
   verifyExports,
   verifyIconRegistry,
   verifyPackedFiles,
+  verifySheetTokens,
 } from "./lib/consumer-expectations.mjs";
 
 const ROOT = process.cwd();
@@ -59,6 +60,7 @@ async function main() {
 
   step("Checking packed files against package.json's exports map");
   verifyPackedFiles(pkgRoot);
+  verifySheetTokens(readFileSync(join(pkgRoot, "dist", "tokens.css"), "utf8"));
   console.log("  ok");
 
   step("Bundling the installed package's entry with Vite (as a real consumer's bundler would)");

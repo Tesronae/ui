@@ -41,6 +41,7 @@ function lines(byPath, prefix, names) {
     .join("\n");
 }
 
+const SHEET = ["sheet-floating-width", "sheet-floating-inset", "sheet-floating-radius", "sheet-mobile-max-height"];
 const SPACING = ["s-micro", "s-fine", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"];
 const RADIUS = ["r-sm", "r", "r-lg", "r-full"];
 const FONT = ["sans", "tight", "mono"];
@@ -132,6 +133,8 @@ const config = {
         const byPath = new Map(dictionary.allTokens.map((token) => [token.path.join("/"), token]));
 
         const root = [
+          "  /* floating sheet geometry */",
+          lines(byPath, ["sheet"], SHEET),
           "  /* spacing — 4px base with fine optical steps */",
           lines(byPath, ["spacing"], SPACING),
           "  /* radius */",

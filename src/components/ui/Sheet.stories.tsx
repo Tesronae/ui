@@ -1,14 +1,17 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Icon } from "../Icon";
 import { Button } from "./Button";
 import { Sheet } from "./Sheet";
 
-function Demo() {
+function Demo({ floating = false, longContent = false }: { floating?: boolean; longContent?: boolean }) {
   const [open, setOpen] = useState(true);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open sheet</Button>
       <Sheet
+        presentation={floating ? "floating" : "edge"}
+        headerLeading={floating ? <Icon name="box" size={24} /> : undefined}
         open={open}
         onClose={() => setOpen(false)}
         title="Amaron N150"
@@ -16,6 +19,7 @@ function Demo() {
         footer={<Button variant="primary">Save</Button>}
       >
         <p>Sheet body content goes here — figures strip, scale visual, accordion action rows.</p>
+        {longContent ? Array.from({ length: 30 }, (_, i) => <p key={i}>Long content row {i + 1}: the header and actions stay visible while this body scrolls.</p>) : null}
       </Sheet>
     </>
   );
@@ -24,7 +28,7 @@ function Demo() {
 const meta = {
   title: "Components/Sheet",
   component: Sheet,
-  tags: ["maturity:experimental"],
+  tags: ["maturity:candidate"],
   parameters: {
     layout: "fullscreen",
     docs: {
@@ -41,3 +45,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = { render: () => <Demo /> };
+
+export const Floating: Story = { render: () => <Demo floating /> };
+export const FloatingLongContent: Story = { render: () => <Demo floating longContent /> };

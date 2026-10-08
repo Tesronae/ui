@@ -8,6 +8,7 @@ import {
   verifyExports,
   verifyIconRegistry,
   verifyPackedFiles,
+  verifySheetTokens,
 } from "./consumer-expectations.mjs";
 
 describe("verifyExports", () => {
@@ -89,4 +90,17 @@ describe("verifyPackedFiles", () => {
     }
     expect(error.message).not.toContain(first);
   });
+});
+
+
+describe("Sheet generated CSS geometry", () => {
+  it("emits all floating Sheet geometry values into the built consumer stylesheet", async () => {
+    const { readFileSync } = await import("node:fs");
+    const css = readFileSync(new URL("../../dist/tokens.css", import.meta.url), "utf8");
+    expect(() => verifySheetTokens(css)).not.toThrow();
+  });
+});
+
+it("rejects missing or incorrect geometry in packed CSS", () => {
+  expect(() => verifySheetTokens(":root { --sheet-floating-width: 1280px; }")).toThrow(/sheet-floating-width: 600px/);
 });
