@@ -32,3 +32,18 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+export const CompactSize: Story = {
+  args: { children: "Neutral" },
+  render: () => (
+    <div className="ims-story-row">
+      <Pill size="compact">8.31%</Pill>
+      <Pill size="compact" variant="pos">
+        8.31%
+      </Pill>
+      <Pill size="compact" variant="neg">
+        3.4%
+      </Pill>
+    </div>
+  ),
+};

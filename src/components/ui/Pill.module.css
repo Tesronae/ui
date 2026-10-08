@@ -33,3 +33,9 @@
   border: 1px solid var(--line);
   color: var(--ink-2);
 }
+.compact {
+  height: auto;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list -- ported verbatim from v26's .kd, see design/docs/principles.md */
+  padding: 3px 7px 3px 5px;
+  border-radius: var(--r-full);
+}

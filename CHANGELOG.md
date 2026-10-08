@@ -6,6 +6,20 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.5] - 2026-10-09
+
+- Added: `Pill` gains `size="compact"` — a smaller, fully-rounded shape
+  (3px 7px 3px 5px padding, `--r-full`) for a figure read inline next to
+  other text, e.g. a KPI card's delta. Candidate for IMS-web W1.5.51 (the
+  KPI delta pill's wrong size/shape vs. the v26 design artifact's `.kd`).
+  Default pill unaffected; no existing call site's rendered output changes.
+- Fixed: `TrendCard`'s scrubbed day label moved from a floating
+  `position: absolute` span inside `.spark` into the `.top` row, in the
+  same flex slot `delta` already vacates while reading — matching v26's
+  `.kpi-day` (a real child of `.kpi-top`, not a detached overlay).
+  Candidate for IMS-web W1.5.52's position bug. No prop changes; existing
+  `days`/`delta` call sites are unaffected.
+
 ## [0.3.4] - 2026-10-08
 
 - Fixed: generate tokens before unit tests in the Publish workflow, matching CI.
