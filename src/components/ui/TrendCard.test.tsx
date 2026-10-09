@@ -39,6 +39,26 @@ describe("TrendCard", () => {
     expect(screen.getByText("+8%")).toBeInTheDocument();
   });
 
+  it("preserves a styled value suffix during pointer and keyboard reads", () => {
+    const days = DAYS.map((day) => ({ ...day, formatted: day.formatted.replace("AED ", "") }));
+    render(<TrendCard label="Sales" spokenLabel="Sales" value="15.00" valueSuffix={<small>AED</small>} days={days} spokenUnit="AED" />);
+    const suffix = screen.getByText("AED");
+    const spark = screen.getByRole("img", { name: /Sales, last/ });
+    spark.getBoundingClientRect = () => ({ left: 0, width: 96 }) as DOMRect;
+    fireEvent.pointerMove(spark, { clientX: 0 });
+    expect(screen.getByText("10.00")).toBeInTheDocument();
+    expect(screen.getByText("AED")).toBe(suffix);
+    fireEvent.pointerLeave(spark);
+    expect(screen.getByText("15.00")).toBeInTheDocument();
+    fireEvent.focus(spark);
+    fireEvent.keyDown(spark, { key: "ArrowLeft" });
+    expect(screen.getByText("20.00")).toBeInTheDocument();
+    expect(screen.getByText("AED")).toBe(suffix);
+    fireEvent.blur(spark);
+    expect(screen.getByText("15.00")).toBeInTheDocument();
+    expect(screen.getByText("AED")).toBe(suffix);
+  });
+
   it("builds the sparkline's accessible name from spokenLabel and the first/last days", () => {
     render(
       <TrendCard

@@ -40,3 +40,12 @@ export const Default: Story = { args: { tone: "good" } };
 export const Bad: Story = { args: { tone: "bad", delta: "-3.1%" } };
 
 export const OwnerOnly: Story = { args: { ownerOnly: true, tone: "neutral" } };
+
+export const PersistentUnit: Story = {
+  args: {
+    value: "1,846.50",
+    valueSuffix: <small style={{ fontSize: "var(--fs-2)", fontFamily: "var(--sans)", color: "var(--ink-3)" }}> AED</small>,
+    days: DAYS.map((day) => ({ ...day, formatted: day.formatted.replace("AED ", "") })),
+    tone: "good",
+  },
+};

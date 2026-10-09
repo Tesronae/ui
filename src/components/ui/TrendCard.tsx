@@ -24,6 +24,7 @@ export interface TrendCardDay {
 export function TrendCard({
   label,
   value,
+  valueSuffix,
   delta,
   days,
   tone = "neutral",
@@ -39,6 +40,9 @@ export function TrendCard({
   spokenLabel: string;
   /** The resting display value — shown until a day is scrubbed. */
   value: ReactNode;
+  /** Persistent styled unit/suffix, outside the value swapped while scrubbing.
+   * Supply its plain-text equivalent separately through spokenUnit. */
+  valueSuffix?: ReactNode;
   /** A pill/indicator built by the caller (locale/plural copy lives there,
    * not in this package) — hidden while a day is being read. */
   delta?: ReactNode;
@@ -125,6 +129,7 @@ export function TrendCard({
       </div>
       <div className={styles.value} data-reading={readingIndex !== null}>
         {readingIndex === null ? value : reading?.formatted}
+        {valueSuffix}
       </div>
       <div
         className={styles.spark}

@@ -34,6 +34,9 @@
   color: var(--ink-2);
 }
 .compact {
+  gap: var(--s-half);
+  line-height: var(--lh-solid);
+  font-weight: var(--fw-bold);
   height: auto;
   /* stylelint-disable-next-line declaration-property-value-allowed-list -- ported verbatim from v26's .kd, see design/docs/principles.md */
   padding: 3px 7px 3px 5px;

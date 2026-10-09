@@ -42,11 +42,11 @@ function lines(byPath, prefix, names) {
 }
 
 const SHEET = ["sheet-floating-width", "sheet-floating-inset", "sheet-floating-radius", "sheet-mobile-max-height"];
-const SPACING = ["s-micro", "s-fine", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"];
+const SPACING = ["s-half", "s-micro", "s-fine", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"];
 const RADIUS = ["r-sm", "r", "r-lg", "r-full"];
 const FONT = ["sans", "tight", "mono"];
 const FONT_SIZE = ["fs-0", "fs-1", "fs-2", "fs-2-5", "fs-3", "fs-3-5", "fs-4", "fs-5", "fs-6", "fs-6-5", "fs-7", "fs-7-5", "fs-8", "fs-8-5", "fs-9"];
-const LINE_HEIGHT = ["lh-display", "lh-label", "lh-tightest", "lh-tight", "lh", "lh-loose", "lh-box"];
+const LINE_HEIGHT = ["lh-solid", "lh-display", "lh-label", "lh-tightest", "lh-tight", "lh", "lh-loose", "lh-box"];
 const FONT_WEIGHT = ["fw", "fw-med", "fw-bold"];
 const Z_INDEX = [
   "z-icon",
