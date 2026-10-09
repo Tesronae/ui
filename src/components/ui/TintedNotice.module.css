@@ -186,3 +186,12 @@
     grid-template-rows: 1fr;
   }
 }
+
+/* Compact contextual banner: icon beside the title, copy beneath both. */
+.compact { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: var(--s2); padding: var(--s4); }
+.compact .chip { grid-column: 1; grid-row: 1; color: var(--t); align-self: center; }
+.compact .body { display: contents; }
+.compact .title { grid-column: 2; font-size: var(--fs-3-5); }
+.compact p { grid-column: 1 / -1; margin-top: 0; font-size: var(--fs-2-5); color: var(--ink-2); }
+.compact .actions { grid-column: 1 / -1; }
+.compact .dismiss { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); }

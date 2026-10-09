@@ -129,11 +129,11 @@ describe("Sheet", () => {
     outside.remove();
   });
 
-  it("cancels an interrupted RTL drag without dismissing", () => {
+  it("cancels an interrupted RTL edge drag without dismissing", () => {
     vi.stubGlobal("PointerEvent", MouseEvent);
     vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: false })));
     const onClose = vi.fn();
-    const { unmount } = render(<Sheet open presentation="floating" onClose={onClose} title="Title">Body</Sheet>);
+    const { unmount } = render(<Sheet open presentation="edge" onClose={onClose} title="Title">Body</Sheet>);
     const dialog = screen.getByRole("dialog");
     dialog.style.direction = "rtl";
     const header = screen.getByRole("heading", { name: "Title" }).parentElement!.parentElement!;
@@ -187,4 +187,20 @@ it("allows keyboard users to focus a read-only scrolling body", async () => {
   expect(body).toHaveAttribute("tabindex", "0");
   await userEvent.tab();
   expect(body).toHaveFocus();
+});
+
+it("moves a desktop floating drawer sideways and cancels without dismissal", () => {
+  vi.stubGlobal("PointerEvent", MouseEvent);
+  vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: false })));
+  const onClose = vi.fn();
+  const { unmount } = render(<Sheet open presentation="floating" onClose={onClose} title="Floating">Body</Sheet>);
+  const dialog = screen.getByRole("dialog");
+  const header = screen.getByRole("heading").parentElement!.parentElement!;
+  fireEvent.pointerDown(header, { clientX: 100, clientY: 0 });
+  fireEvent.pointerMove(header, { clientX: 150, clientY: 0 });
+  expect(dialog.style.transform).toBe("translate3d(50px, 0, 0)");
+  fireEvent.pointerCancel(header);
+  expect(dialog.style.transform).toBe("");
+  expect(onClose).not.toHaveBeenCalled();
+  unmount(); vi.unstubAllGlobals();
 });

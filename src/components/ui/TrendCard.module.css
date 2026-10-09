@@ -15,7 +15,7 @@
   gap: var(--s2);
   font-size: var(--fs-1);
   font-weight: var(--fw-med);
-  color: var(--ink-3);
+  color: var(--ink-2);
   white-space: nowrap;
 }
 .ownerLock {
@@ -23,13 +23,13 @@
   color: var(--ink-3);
 }
 .value {
-  margin-top: var(--s2);
+  margin-top: var(--s5);
   font-family: var(--tight);
   font-size: var(--fs-9);
   font-weight: var(--fw-bold);
-  letter-spacing: -0.028em;
+  letter-spacing: -0.032em;
   line-height: var(--lh-tightest);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: normal;
   transition: color var(--dur);
 }
 .value[data-reading="true"] {

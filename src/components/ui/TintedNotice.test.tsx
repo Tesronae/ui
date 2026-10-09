@@ -112,3 +112,9 @@ describe("TintedNotice", () => {
     expect(screen.getByText("x")).toBeInTheDocument();
   });
 });
+
+it("keeps compact notices announced with their action available", () => {
+  render(<TintedNotice layout="compact" tone="neg" title="Stock discrepancy" action={<button>Count stock</button>}>Check the shelf.</TintedNotice>);
+  expect(screen.getByRole("alert")).toHaveClass(styles.compact!);
+  expect(screen.getByRole("button", { name: "Count stock" })).toBeInTheDocument();
+});

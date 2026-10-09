@@ -140,3 +140,23 @@
     touch-action: auto;
   }
 }
+
+/* Floating presentation follows the final v26 desktop-panel override. */
+.floating { --ring: 0 0 0 2px var(--ink); container-type: inline-size; container-name: sheet; border-color: var(--sec-line); }
+.floating .header { border-bottom: 0; }
+.floating .title { font-size: var(--fs-6-25); line-height: var(--lh-label); }
+.floating .description { font-size: var(--fs-2-5); }
+.floating .footer { background: var(--bg); border-color: var(--line-2); }
+@media (max-width: 720px) {
+  .sheet.floating { width: 100%; max-height: var(--sheet-mobile-max-height); }
+  .floating .grab { top: 10px; width: 40px; height: 5px; background: var(--ink-4); opacity: .55; }
+  .floating .header { padding: var(--s7) var(--s4) var(--s4); }
+  .floating .body { padding: 0 var(--s4) var(--s5); }
+  .floating .footer { padding-inline: var(--s4); }
+}
+@media (prefers-reduced-motion: reduce) { .floating .header { cursor: default; touch-action: auto; } }
+
+@media (min-width: 721px) {
+  .scrim:has(.floating) { background: rgba(15, 19, 25, calc(.18 * var(--sheet-fade, 1))); }
+  :global([data-theme="dark"]) .scrim:has(.floating) { background: rgba(0, 0, 0, calc(.45 * var(--sheet-fade, 1))); }
+}
