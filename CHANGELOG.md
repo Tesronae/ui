@@ -6,15 +6,15 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
-## [0.3.8-v26.0] - 2026-10-09
+## [0.3.8] - 2026-10-09
 
-- Candidate: floating sheets retain the 600px desktop right panel with 10px insets
+- Fixed: floating sheets retain the 600px desktop right panel with 10px insets
   and horizontal dismissal; phones retain the bottom sheet with downward dismissal.
   Headings use 18px type and footers match the sheet surface.
 - Added: compact tinted notices place their icon beside the title and their copy below.
 - Fixed: panel header/footer spacing and 15.5px headings, accordion typography, and
   KPI value spacing/tracking match the current v26 reference.
-- Candidate requires named-commit visual approval before release.
+- Release approved by the owner after merging PR #17 (commit `6d58d86`).
 
 ## [0.3.7] - 2026-10-09
 
