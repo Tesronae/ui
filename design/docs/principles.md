@@ -126,6 +126,9 @@ input size: smaller text triggers iOS Safari auto-zoom on focus.
 
 ### Line height
 
+`--lh-solid` (1) keeps compact figure pills at their reference height, independent
+of inherited paragraph leading. Their internal icon gap uses `--s-half` (2px).
+
 Unitless everywhere except `--lh-box: 18px`, used only where the line-height is
 matched to an explicit fixed single-line box height (`Topbar`'s search shortcut kbd,
 `Select`'s option row) rather than governing paragraph flow — a genuinely pixel-based
