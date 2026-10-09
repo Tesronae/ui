@@ -67,3 +67,5 @@ export const Inline: Story = {
     action: <Button size="sm" onClick={fn()}>Review item</Button>,
   },
 };
+
+export const Compact: Story = { args: { tone: "neg", layout: "compact", title: "Stock discrepancy", children: "The recorded quantity disagrees with the shelf. Count the stock to correct it." } };

@@ -34,7 +34,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "A generic scrim + edge-anchored panel: a right-side inset panel at ≥721px, a bottom sheet below it, with drag-to-dismiss on touch (skipped under reduced motion), Escape to close, and a focus trap. Domain content stays with the consumer — pair with `AccordionRow` for an action list in the body.",
+          "A generic scrim + edge-anchored panel: a right-side inset panel on desktop and a bottom sheet on phones with floating presentation, with drag-to-dismiss on touch (skipped under reduced motion), Escape to close, and a focus trap. Domain content stays with the consumer — pair with `AccordionRow` for an action list in the body.",
       },
     },
   },

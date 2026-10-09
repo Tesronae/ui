@@ -73,7 +73,7 @@ export function TintedNotice({
   // "stacked": bordered icon chip, action inside the body, below the text.
   // "inline": bare tone-colored icon, action as a third row cell beside
   // the body — the dashboard negative-stock banner's shape.
-  layout?: "stacked" | "inline";
+  layout?: "stacked" | "inline" | "compact";
   // Set false to skip the mount/dismiss WAAPI sequences entirely (tests,
   // a consumer that plays its own entrance instead).
   animate?: boolean;
@@ -195,7 +195,7 @@ export function TintedNotice({
               {title}
             </div>
             <p ref={bodyRef}>{children}</p>
-            {layout === "stacked" && action ? <div className={styles.actions}>{action}</div> : null}
+            {layout !== "inline" && action ? <div className={styles.actions}>{action}</div> : null}
           </div>
           {layout === "inline" && action ? <div className={styles.inlineAction}>{action}</div> : null}
           {onDismiss ? (

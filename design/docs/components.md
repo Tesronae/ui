@@ -147,3 +147,11 @@ removed under reduced motion, along with dragging. Consumers supply translated
 themes, direction settings, narrow viewports and reduced motion. This candidate
 still needs manual screen-reader review and named-commit human approval before
 release/adoption.
+
+### Floating sheet and compact notice candidate
+
+Floating presentation follows v26’s final override: a 600px right panel with 10px
+insets on desktop; a full-width bottom sheet on phones. It retains Escape, focus
+trapping/restoration and reduced-motion behavior. Drag follows the visible edge.
+TintedNotice supports `layout="compact"` for a small context banner with its icon
+beside the title and supporting text below. Review this candidate before adoption.
