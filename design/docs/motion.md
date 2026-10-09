@@ -37,6 +37,10 @@ retrofitted later.
   `src/components/ui/TextField.module.css`, `src/components/ui/Select.module.css`.
   (The IMS-web consumer app has its own additional `--dur` consumers, e.g. its
   shell and counter screens — those stay in `IMS-web`, not here.)
+- The Sheet motion candidate uses `--dur-step`/250ms and `--ease-out` for
+  panel transforms and backdrop opacity. The exiting layer is retained, inert,
+  and hidden from assistive technology; focus/scroll release immediately.
+  Reopening interrupts exit, and reduced motion disables the transition.
 - The only keyframe animation in this package is `src/components/ui/Skeleton.module.css`'s
   `sweep 1.25s infinite` shimmer.
 - `prefers-reduced-motion` is handled **per component**, in each component's own

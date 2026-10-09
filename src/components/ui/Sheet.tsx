@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { Icon } from "../Icon";
 import { Button } from "./Button";
 import styles from "./Sheet.module.css";
@@ -66,6 +66,18 @@ export function Sheet({
   presentation?: "edge" | "floating";
   headerLeading?: ReactNode;
 }) {
+  const [present, setPresent] = useState(open);
+  const [previousOpen, setPreviousOpen] = useState(open);
+  const view = { title, description, footer, children, headerLeading };
+  const [retained, setRetained] = useState(view);
+  // Keep the outgoing content while callers clear their selected item.
+  if (open && (retained.title !== title || retained.description !== description || retained.footer !== footer ||
+      retained.children !== children || retained.headerLeading !== headerLeading)) setRetained(view);
+  if (previousOpen !== open) {
+    setPreviousOpen(open);
+    if (open) setPresent(true);
+  }
+  const displayed = open ? view : retained;
   const panelRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<DragState | null>(null);
@@ -117,6 +129,15 @@ export function Sheet({
     };
   }, [open]);
 
+  useEffect(() => {
+    if (open || !present) return;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const duration = reduced ? 0 : getComputedStyle(panelRef.current!).transitionDuration
+      .split(",").reduce((max, part) => Math.max(max, Number.parseFloat(part) * (part.trim().endsWith("ms") ? 1 : 1000) || 0), 0);
+    const timer = window.setTimeout(() => setPresent(false), duration + (duration ? 32 : 0));
+    return () => window.clearTimeout(timer);
+  }, [open, present]);
+
   const onGrabPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
     if (target.closest("button, input, select, textarea, a, [role=button]")) return;
@@ -164,12 +185,15 @@ export function Sheet({
     if (distance > 0 && (distance >= size * DISMISS_RATIO || velocity > FLICK_VELOCITY_PX_MS)) onClose();
   };
 
-  if (!open) return null;
+  if (!open && !present) return null;
 
   return (
     <div
       ref={scrimRef}
       className={styles.scrim}
+      data-state={open ? "open" : "closed"}
+      inert={!open}
+      aria-hidden={!open || undefined}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -184,12 +208,12 @@ export function Sheet({
           onLostPointerCapture={endDrag}
         >
           <span className={styles.grab} aria-hidden="true" />
-          {headerLeading ? <div className={styles.headerLeading}>{headerLeading}</div> : null}
+          {displayed.headerLeading ? <div className={styles.headerLeading}>{displayed.headerLeading}</div> : null}
           <div className={styles.titleBlock}>
             <h2 id={titleId} className={styles.title}>
-              {title}
+              {displayed.title}
             </h2>
-            {description ? <p className={styles.description}>{description}</p> : null}
+            {displayed.description ? <p className={styles.description}>{displayed.description}</p> : null}
           </div>
           <div className={styles.headerClose}>
             <Button icon size="sm" variant="ghost" aria-label={closeLabel} onClick={onClose}>
@@ -197,8 +221,8 @@ export function Sheet({
             </Button>
           </div>
         </div>
-        <div className={styles.body} tabIndex={0}>{children}</div>
-        {footer ? <div className={styles.footer}>{footer}</div> : null}
+        <div className={styles.body} tabIndex={0}>{displayed.children}</div>
+        {displayed.footer ? <div className={styles.footer}>{displayed.footer}</div> : null}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Sheet } from "./Sheet";
@@ -203,4 +203,34 @@ it("moves a desktop floating drawer sideways and cancels without dismissal", () 
   expect(dialog.style.transform).toBe("");
   expect(onClose).not.toHaveBeenCalled();
   unmount(); vi.unstubAllGlobals();
+});
+
+it("retains an inert outgoing frame, releases focus immediately, and cancels removal on reopen", () => {
+  vi.useFakeTimers();
+  const nativeStyle = window.getComputedStyle.bind(window);
+  vi.spyOn(window, "getComputedStyle").mockImplementation(el => {
+    const style = nativeStyle(el);
+    Object.defineProperty(style, "transitionDuration", { value: "0.25s" });
+    return style;
+  });
+  const trigger = document.createElement("button");
+  document.body.append(trigger);
+  trigger.focus();
+  const { container, rerender, unmount } = render(<Sheet open onClose={() => {}} title="Part"><p>Stock facts</p></Sheet>);
+  rerender(<Sheet open={false} onClose={() => {}} title="">{null}</Sheet>);
+  expect(screen.queryByRole("dialog")).toBeNull();
+  expect(container.querySelector('[data-state="closed"]')).toHaveAttribute("inert");
+  expect(container).toHaveTextContent("Stock facts");
+  expect(trigger).toHaveFocus();
+  expect(document.body.style.overflow).not.toBe("hidden");
+  act(() => vi.advanceTimersByTime(100));
+  rerender(<Sheet open onClose={() => {}} title="Second part"><p>New facts</p></Sheet>);
+  act(() => vi.advanceTimersByTime(400));
+  expect(screen.getByRole("dialog")).toBeVisible();
+  expect(container).toHaveTextContent("New facts");
+  expect(container).not.toHaveTextContent("Stock facts");
+  rerender(<Sheet open={false} onClose={() => {}} title="Second part"><p>New facts</p></Sheet>);
+  act(() => vi.advanceTimersByTime(300));
+  expect(container.querySelector('[data-state]')).toBeNull();
+  unmount(); trigger.remove(); vi.restoreAllMocks(); vi.useRealTimers();
 });

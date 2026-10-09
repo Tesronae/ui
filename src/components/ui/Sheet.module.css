@@ -163,3 +163,59 @@
   .scrim:has(.floating) { background: rgba(15, 19, 25, calc(.18 * var(--sheet-fade, 1))); }
   :global([data-theme="dark"]) .scrim:has(.floating) { background: rgba(0, 0, 0, calc(.45 * var(--sheet-fade, 1))); }
 }
+
+/* Presence retains only the outgoing visual layer. Focus and scroll are
+   released immediately; reopening retargets these transitions. */
+.scrim {
+  opacity: 1;
+  transition: opacity var(--dur-step) var(--ease-out);
+}
+
+.sheet,
+.floating {
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--dur-step) var(--ease-out);
+}
+
+.scrim[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrim[data-state="closed"] .sheet {
+  transform: translate3d(calc(100% + var(--sheet-floating-inset) * 2), 0, 0);
+}
+
+.scrim[data-state="closed"] .sheet:dir(rtl) {
+  transform: translate3d(calc(-100% - var(--sheet-floating-inset) * 2), 0, 0);
+}
+
+@starting-style {
+  .scrim { opacity: 0; }
+  .sheet { transform: translate3d(calc(100% + var(--sheet-floating-inset) * 2), 0, 0); }
+  .sheet:dir(rtl) { transform: translate3d(calc(-100% - var(--sheet-floating-inset) * 2), 0, 0); }
+}
+
+@media (max-width: 720px) {
+  .scrim[data-state="closed"] .sheet,
+  .scrim[data-state="closed"] .sheet:dir(rtl) {
+    transform: translate3d(0, 100%, 0);
+  }
+  @starting-style {
+    .sheet,
+    .sheet:dir(rtl) { transform: translate3d(0, 100%, 0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim,
+  .sheet,
+  .floating { transition: none; }
+  .scrim[data-state="closed"] .sheet,
+  .scrim[data-state="closed"] .sheet:dir(rtl) { transform: none; }
+  @starting-style {
+    .scrim { opacity: 1; }
+    .sheet,
+    .sheet:dir(rtl) { transform: none; }
+  }
+}

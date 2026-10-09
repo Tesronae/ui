@@ -135,6 +135,13 @@ with a 14px radius, or a bottom sheet capped at 88dvh below 721px. The optional
 existing `footer` remains outside the scrolling body; keep primary actions there.
 The header and footer do not shrink when body content overflows.
 
+The motion candidate slides the panel from its desktop edge or phone bottom,
+with a fading backdrop, using `--dur-step` and `--ease-out`. Keep the component
+mounted and toggle `open` so its exit can finish. Closing releases focus and
+body scroll immediately; the retained outgoing layer is inert and hidden from
+assistive technology. Reopening cancels removal. Reduced motion skips the slide
+and removes the outgoing layer immediately.
+
 Opening focuses the first available control, Tab stays inside the dialog,
 Escape and the scrim close it, and closing restores focus to the opener if it
 still exists. Hidden, inert, disabled and negative-tabindex elements are excluded

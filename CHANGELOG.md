@@ -6,6 +6,14 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.10] - 2026-10-09
+
+- Added: sheets slide in and out with a fading backdrop, retain outgoing content,
+  release focus/scroll immediately on close, and suppress motion under reduced motion.
+  Consumers must keep Sheet mounted and change its `open` prop to play the exit.
+- Owner approved candidate `d1e9237` in chat before release preparation and
+  explicitly waived manual screen-reader review for this release only.
+
 ## [0.3.9] - 2026-10-09
 
 - Fixed: floating sheets use the shared accent focus ring again instead of
