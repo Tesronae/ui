@@ -6,6 +6,8 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.7] - 2026-10-09
+
 - Added: `TrendCard.valueSuffix` keeps caller-styled units visible during pointer
   and keyboard scrubbing, without changing exact formatted text or announcements.
 - Fixed: compact `Pill` uses v26's single-line leading, 2px icon gap and figure
