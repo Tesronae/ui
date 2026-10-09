@@ -141,8 +141,11 @@
   }
 }
 
-/* Floating presentation follows the final v26 desktop-panel override. */
-.floating { --ring: 0 0 0 2px var(--ink); container-type: inline-size; container-name: sheet; border-color: var(--sec-line); }
+/* Floating presentation follows the final v26 desktop-panel override.
+   Focus ring stays the shared accent --ring token — a prior pass here
+   swapped it for a dark ink ring, which read as a broken/unstyled focus
+   state against the floating panel's light chrome. */
+.floating { container-type: inline-size; container-name: sheet; border-color: var(--sec-line); }
 .floating .header { border-bottom: 0; }
 .floating .title { font-size: var(--fs-6-25); line-height: var(--lh-label); }
 .floating .description { font-size: var(--fs-2-5); }

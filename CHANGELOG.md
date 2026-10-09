@@ -6,6 +6,13 @@ semantic versioning as described in `AGENTS.md`.
 
 ## [Unreleased]
 
+## [0.3.9] - 2026-10-09
+
+- Fixed: floating sheets use the shared accent focus ring again instead of
+  the dark ink ring introduced in 0.3.8 — that read as a broken/unstyled
+  focus state against the floating panel's light chrome.
+- Release approved by the owner (niranjRaj) in chat, same-session fix.
+
 ## [0.3.8] - 2026-10-09
 
 - Fixed: floating sheets retain the 600px desktop right panel with 10px insets
